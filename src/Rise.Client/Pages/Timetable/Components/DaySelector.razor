@@ -1,0 +1,59 @@
+<div class="day-selector">
+    @foreach (var day in Days)
+    {
+        <DayItem 
+            Day="@day"
+            IsActive="(day == ActiveDay)"
+            OnSelected="SelectDay" />
+    }
+</div>
+
+@code {
+    private readonly string[] Days = ["Ma", "Di", "Wo", "Do", "Vr"];
+    private string ActiveDay = string.Empty;
+
+    [Parameter] public EventCallback<string> OnDayChanged { get; set; }
+    [Parameter] public DayOfWeek? ForceActiveDay { get; set; }
+
+    protected override void OnInitialized()
+    {
+        ActiveDay = DateTime.Now.DayOfWeek switch
+        {
+            DayOfWeek.Monday => "Ma",
+            DayOfWeek.Tuesday => "Di",
+            DayOfWeek.Wednesday => "Wo",
+            DayOfWeek.Thursday => "Do",
+            DayOfWeek.Friday => "Vr",
+            _ => "Ma"
+        };
+        _ = OnDayChanged.InvokeAsync(ActiveDay);
+    }
+    
+    protected override void OnParametersSet()
+    {
+        if (ForceActiveDay is not null)
+        {
+            var newActiveDay = ForceActiveDay.Value switch
+            {
+                DayOfWeek.Monday => "Ma",
+                DayOfWeek.Tuesday => "Di",
+                DayOfWeek.Wednesday => "Wo",
+                DayOfWeek.Thursday => "Do",
+                DayOfWeek.Friday => "Vr",
+                _ => "Ma"
+            };
+
+            if (newActiveDay != ActiveDay)
+            {
+                ActiveDay = newActiveDay;
+                _ = OnDayChanged.InvokeAsync(ActiveDay);
+            }
+        }
+    }
+
+    private async Task SelectDay(string day)
+    {
+        ActiveDay = day;
+        await OnDayChanged.InvokeAsync(day);
+    }
+}

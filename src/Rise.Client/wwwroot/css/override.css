@@ -1,0 +1,895 @@
+/* 
+================================
+DASHBOARD OVERRIDE CSS
+================================
+*/
+
+.class-schedule-section, .deadlines-section, .resto-section, .page, .detail-info, .contact-page {
+    margin: 30px;
+    padding-bottom: 30px;
+}
+
+.class-schedule-section {
+    padding-bottom: 0;
+}
+
+.deadline-inline{
+    padding-bottom: 25px;
+}
+
+.announcements-section {
+    margin: 30px 50px 0;
+}
+
+.events-section {
+    margin: 10px 0 0;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.panel-block-custom {
+    color: black;
+}
+
+.panel-block-custom:hover {
+    color: white;
+}
+
+
+.carousel-space {
+    margin-bottom: -26px;
+}
+
+.abscence-margin {
+    margin: 0 30px 40px;
+}
+
+.centered-login-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 40px 60px 60px;
+    gap: 20px;
+}
+.centered-login-block p{
+    margin-bottom: 10px;
+}
+
+.centered-login-block i{
+    font-size: 3rem;
+}
+
+@media (min-width: 1280px) {
+    .right-column {
+        background-color: #f5f9fa;
+    }
+    
+    .events-section {
+        overflow-x: visible;
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 50px;
+    }
+
+    .carousel-space {
+        margin-top: 30px;
+        margin-bottom: 40px;
+    }
+
+    .class-schedule-section {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 30px;
+    }
+
+    .abscence-margin {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 1279px) {
+    .announcements-section {
+        margin: 15px 30px;
+    }
+}
+
+/* Alerts */
+.alert-section span {
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+.dashboard-alert {
+    margin: 0 30px;
+}
+
+
+@media (min-width: 1280px) {
+    .dashboard-alert {
+        margin: 0;
+    }
+
+    .quicklinks-section {
+        padding-top: 30px;
+        width: 100%;
+    }
+}
+
+/* Quick links */
+.quicklinks-buttons{
+    display: flex;
+    gap: 6px;
+}
+
+.quicklinks-edit-button{
+    color: white;
+    background-color: black;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    margin-top: -36px;
+}
+
+.quicklinks-reorder-button{
+    color: white;
+    margin-top: -40px;
+}
+
+.quicklinks-save-button{
+    color: white;
+    font-weight: 600;
+    margin-top: -37px;
+    background-color: var(--secondary-color);
+    font-size: 0.8rem;
+    border-radius: 20px;
+    padding: 0 10px;
+    height: 33px;
+    margin-right: -10px;
+}
+
+.quicklinks-section {
+    margin: 0 0 20px 0;
+}
+
+.quicklinks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 50px 30px 40px;
+    background-color: #C9D2D9;
+}
+
+.quicklinks-section .back-link {
+    width: fit-content;
+    transform: scaleX(-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    color: white;
+    margin-top: -40px;
+}
+
+.quicklinks-section .back-link:hover {
+    background-color: var(--lightgray);
+}
+
+.quicklinks-header h3 {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.quicklinks-header a {
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    transition: color 0.2s;
+    margin-top: -5px;
+    height: 80px;
+}
+
+.quicklinks-grid {
+    display: flex;
+    gap: 10px;
+    padding: 0 15px;
+    margin: -60px 0 0 0;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    /*Scrollable on mobile*/
+    -webkit-overflow-scrolling: touch;
+}
+
+.quicklinks-grid::-webkit-scrollbar {
+    display: none; /* verberg de scrollbar */
+}
+
+/* Accordion */
+
+.mud-expansion-panels {
+    border-top: 1px solid #e0e0e0;
+}
+
+.mud-expand-panel {
+    border-bottom: 1px solid #e0e0e0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+}
+
+.mud-expand-panel.expanded {
+    border-bottom: 1px solid #e0e0e0 !important;
+}
+
+.mud-expand-panel-content.mud-expand-panel-gutters {
+    padding: 0 !important;
+    border: none !important;
+    background-color: transparent !important;
+}
+
+.mud-expand-panel-header {
+    font-weight: 800;
+}
+
+.all-quicklinks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    row-gap: 30px;
+    padding: 20px 15px 50px;
+    margin: 0;
+}
+
+.all-quicklinks-grid .quicklink-icon, .facilities-item .quicklink-icon  {
+    background-color: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.all-quicklinks-grid .quicklink-item p:last-of-type {
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.all-shortcuts{
+    margin-top: 20px;
+}
+
+/* 
+================================
+NEWS PAGE OVERRIDE CSS
+================================
+*/
+
+.news-page {
+    padding-bottom: 30px;
+}
+
+.news-page .mud-tab.mud-tab-active {
+    font-weight: 700;
+}
+
+.news-page .mud-tab-slider,
+.weekmenu .mud-tab-slider {
+    background-color: var(--secondary-color) !important;
+}
+
+.news-page .mud-tabs-tabbar-wrapper,
+.weekmenu .mud-tabs-tabbar-wrapper {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: stretch !important; /* override mud-tabs-centered */
+    gap: 0 !important;
+}
+.campus-group .mud-tabs-tabbar{
+    position: static !important;
+}
+.news-page .mud-tabs-tabbar-wrapper > .mud-tooltip-root,
+.weekmenu .mud-tabs-tabbar-wrapper > .mud-tooltip-root {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    display: flex !important;
+}
+
+.news-page .mud-tabs-tabbar-wrapper > .mud-tooltip-root > .mud-tab,
+.weekmenu .mud-tabs-tabbar-wrapper > .mud-tooltip-root > .mud-tab {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 1 1 0 !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.news-page .mud-tabs-tabbar,
+.weekmenu .mud-tabs-tabbar {
+    padding: 15px 0 0;
+    font-size: 1rem;
+    position: sticky;
+    top: 64px;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.article-page .info-section {
+    margin: 30px;
+    padding-bottom: 20px;
+}
+
+.event-article-page .info-section {
+    margin: 30px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.article-sidebar {
+    flex: 1;
+    border-bottom: 3px solid var(--secondary-color);
+    margin-bottom: 30px;
+}
+
+.buttonset .secondButton .common-link-button {
+    background-color: var(--secondary-color);
+    margin-top: 5px;
+}
+
+@media (min-width: 1280px) {
+    .event-article-page .info-section {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    .article-content {
+        flex: 2;
+    }
+
+    .article-sidebar {
+        flex: 1;
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    .article-sidebar .buttonset .secondButton .common-link-button {
+        margin-top: 0;
+    }
+}
+
+/* 
+================================
+TIMETABLE PAGE OVERRIDE CSS
+================================
+*/
+
+.lessenrooster-title a.common-link-button {
+    width: 100%;
+    min-width: 100%;
+    margin: 20px 0;
+}
+
+.week-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (min-width: 1280px) {
+    .lessenrooster-title h2 {
+        margin-bottom: 0;
+    }
+}
+
+/* 
+================================
+SETTINGS PAGE OVERRIDE CSS
+================================
+*/
+
+.settingspage{
+    padding: 15px;
+}
+
+@media (min-width: 1280px) {
+    .settingspage {
+        margin: 80px 500px 0 500px;
+    }
+}
+
+/* 
+================================
+LOGIN OVERRIDE CSS
+================================
+*/
+.foto-top {
+    width: 100%;
+    object-fit: cover;
+}
+
+.foto-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label{
+    color: black;
+    font-size: 1.2rem;
+}
+
+.form-container{
+    margin-top: -40px;
+}
+
+.input-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input{
+    width: 80vw;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 0;
+    border: 1px solid #ccc;
+    color: black;
+}
+
+.error-message {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #e63946;
+}
+
+.button-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.login-button,
+.dev-login-button {
+    width: 80vw;
+    max-width: 500px;
+    padding: 11px;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.login-button {
+    color: white;
+    background-color: var(--main-bg-color);
+}
+
+.dev-login-button {
+    background: linear-gradient(135deg, #00A4EF, #68217A);
+}
+
+.dev-button-inhoud{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.dev-button-inhoud img {
+    width: 25px;
+}
+
+.gast-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 40px 0 20px 0;
+}
+
+.gast-login{
+    text-decoration: underline;
+    font-size: 1.1rem;
+}
+
+.login-title {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .foto-container, .foto-container picture {
+        min-height: calc(100vh - 116px);
+    }
+    
+    .foto-top {
+        min-height: calc(100vh - 116px);
+        object-fit: cover;
+        display: block;
+    }
+    
+    .login-title {
+        display: block;
+        margin-bottom: 70px;
+    }
+    
+    .loginpage-container {
+        display: flex;
+        min-height: calc(100vh - 116px);
+    }
+    
+    .login-container {
+        min-height: calc(100vh - 116px);
+        padding: 60px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.geen-snelkoppelingen {
+    margin-left: 15px;
+}
+
+/* 
+================================
+CONTACT OVERRIDE CSS
+================================
+*/
+
+.contact-item{
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-decoration: underline;
+}
+
+
+.contact-page {
+    margin: 100px 40px;
+}
+
+@media (min-width: 1024px) {
+    .contact-page {
+        margin: 100px auto;
+        max-width: 1200px;
+    }
+}
+
+.contact-card p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.contact-card a {
+    text-decoration: underline;
+}
+
+.contact-card p:first-child {
+  font-weight: bold;
+}
+
+
+/* 
+================================
+DEADLINES OVERRIDE CSS
+================================
+*/
+
+.filtering-section {
+    margin-bottom: 30px !important;
+}
+
+.label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* 
+================================
+CAMPUS PAGE OVERRIDE CSS
+================================
+*/
+
+.campus-container {
+    position: relative;
+    height: calc(100vh - 116px);
+    width: 100%;
+}
+
+.map-container {
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    position: relative;
+}
+
+.map-container .panzoom {
+    width: 100%;
+    height: 100%;
+}
+
+.map-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.search-wrapper {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 20;
+}
+
+.search-wrapper.active {
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.back-button {
+    margin-right: 8px;
+    display: none;
+}
+
+.search-bar {
+    flex: 1;
+    position: relative;
+}
+
+.clear-button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    z-index: 21;
+    display: none;
+}
+
+.search-results {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 10;
+    overflow-y: auto;
+    padding: 16px;
+    display: none;
+}
+
+.search-results.active {
+    display: block;
+}
+
+.search-results h3 {
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.search-results ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.search-results li {
+    padding: 12px 0;
+    cursor: pointer;
+}
+
+.search-results p {
+    text-align: center;
+    color: #666;
+    margin-top: 16px;
+}
+
+.bottom-buttons {
+    position: fixed;
+    bottom: 100px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.bottom-buttons a {
+    background-color: var(--main-bg-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 55px;
+    border-radius: 5px;
+}
+
+.bottom-buttons a:first-of-type {
+    background-color: var(--secondary-color);
+}
+
+.campus-selection-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 83px);
+    padding: 30px;
+    
+    background-color: black;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    overflow-y: auto;
+}
+
+.overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.overlay-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.campus-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.campus-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    cursor: pointer;
+}
+
+.campus-item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.campus-item-name {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.campus-item-address {
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+.no-campus-map {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85%;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+
+.no-campus-map p {
+    font-size: 1.2rem;
+    padding: 30px;
+}
+
+@media (min-width: 1280px) {
+    .search-results {
+        padding: 30px;
+    }
+
+    .bottom-buttons {
+        bottom: 80px;
+    }
+    
+    .campus-selection-overlay {
+        height: 100vh;
+    }
+}
+
+/* 
+================================
+CAMPUS DETAIL PAGE OVERRIDE CSS
+================================
+*/
+
+.detail-info {
+    padding-top: 10px;
+    padding-bottom: 60px;
+}
+
+.detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.button-div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media (min-width: 600px) {
+    .button-div {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .detail-info {
+        max-width: 70%;
+        margin: 40px auto 0;
+    }
+}
+
+.button-div2 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media (min-width: 600px) {
+    .button-div2 {
+        flex-direction: row;
+        justify-content: center;
+        margin: 40px auto 0;
+    }
+}
+
+.mud-pagination-item-selected .mud-button-filled {
+    box-shadow: none !important;
+}
+
+/* 
+=============================
+CAMPUS LIFE PAGE OVERRIDE CSS
+=============================
+*/
+
+.promo-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.pin-text{
+    font-size: 14px;
+    font-weight: 900;
+}
+
+/* 
+=============================
+LOADING OVERRIDE
+=============================
+*/
+
+.loading-container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background-color: white;
+}
+

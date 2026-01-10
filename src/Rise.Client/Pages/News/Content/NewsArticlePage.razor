@@ -1,0 +1,32 @@
+@page "/nieuws-en-events/nieuws/{NewsId:int}"
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.Pages.News.Components
+@using Rise.Shared.News
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.Resources.Pages.News
+
+@inject INewsService NewsService
+@inject IStringLocalizer<News> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+@if (_article is null)
+{  
+    <Loader ShowBackButton="true" Text="@Loc["ArticleLoading"]"/>
+}
+else
+{
+    <div class="article-page">
+        <div>
+            <ArticleHeader Article="_article"/>
+        </div>
+        <div class="info-section">
+            <UserCard Name="@_article.AuthorName"
+                      Function="@_article.AuthorFunction"
+                      Avatar="@_article.AuthorAvatarUrl"/>
+            <p class="mt-7">@((MarkupString)_article.Content)</p>
+        </div>
+        <ScrollToTop />
+    </div>
+}

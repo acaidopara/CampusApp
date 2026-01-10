@@ -1,0 +1,91 @@
+name: Deploy via EC2
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    runs-on: ubuntu-latest
+  
+    steps:
+      - name: Send Discord notification
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d '{
+            "username": "GitHub Actions",
+            "content": "🚀 GitHub Action **${{ github.workflow }}** is getriggerd!\nRepository: **${{ github.repository }}**\nEvent: **${{ github.event_name }}**"
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK }}
+      
+      - name: Setup SSH access
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          ssh-keyscan -p ${{ secrets.EC2_SSH_PORT }} -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to EC2
+        run: |
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} -p ${{ secrets.EC2_SSH_PORT }} << 'EOF'
+
+            echo "==> Navigating to project directory..."
+            cd /home/${{ secrets.EC2_USER }}/devops-project/
+
+            echo "==> Updating project repo safely..."
+            cd dotnet-2526-gent7
+            git fetch origin
+            git reset --hard origin/main
+
+            echo "==> Clearing old build directories..."
+            sudo rm -rf /srv/app/src/*
+            sudo rm -rf /opt/app/publish/*
+
+            echo "==> Copying updated source..."
+            sudo cp -r src/* /srv/app/src/
+
+            echo "==> Stopping dotnet service..."
+            sudo systemctl stop dotnet-app
+
+            echo "==> Restoring project..."
+            cd /srv/app/src/
+            sudo dotnet restore Rise.Server/Rise.Server.csproj 2>&1 | tee /tmp/dotnet-restore.log
+
+            echo "==> Publishing project..."
+            sudo dotnet publish Rise.Server/Rise.Server.csproj -c Release -o /opt/app/publish 2>&1 | tee /tmp/dotnet-publish.log
+
+            echo "==> Starting dotnet service..."
+            sudo systemctl start dotnet-app
+
+            echo "==> Deployment completed successfully!"
+          EOF
+      
+      - name: Notify success on Discord
+        if: success()
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d '{
+            "username": "GitHub Actions",
+            "content": "✅ **Deploy geslaagd!**\nRepo: **${{ github.repository }}**\nBranch: **${{ github.ref_name }}**"
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK }}
+      
+      - name: Notify failure on Discord
+        if: failure()
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d '{
+            "username": "GitHub Actions",
+            "content": "❌ **Deploy gefaald!**\nRepo: **${{ github.repository }}**\nStap: **${{ github.job }}**\nBekijk logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK }}
+
+

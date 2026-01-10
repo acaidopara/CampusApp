@@ -1,0 +1,34 @@
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Deadlines
+@using Rise.Shared.Deadlines
+@inject IStringLocalizer<Deadline> Loc
+
+<h2 class="subtitle">@Loc["CompletedDeadlines"]</h2>
+<div class="columns is-multiline">
+    @foreach (var deadline in CompletedDeadlines)
+    {
+        <div class="column is-full-mobile is-half-tablet is-one-third-desktop" @key="deadline.Id">
+            <DeadlineBlock Deadline="deadline" OnCompletedChanged="OnCompletedChange"/>
+        </div>
+    }
+    @if (!CompletedDeadlines.Any())
+    {
+        <div class="column">
+            <p class="has-text-centered has-text-grey">@Loc["NoCompletedDeadlinesMatch"]</p>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public required IEnumerable<DeadlineDto.Index> CompletedDeadlines { get; set; }
+    [Parameter] public EventCallback UpdateUi { get; set; }
+
+    private async Task OnCompletedChange()
+    {
+        if (UpdateUi.HasDelegate)
+        {
+            await UpdateUi.InvokeAsync();
+        }
+    }
+
+}

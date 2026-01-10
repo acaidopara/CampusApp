@@ -1,0 +1,53 @@
+@namespace Rise.Client.Components.Events
+@using Rise.Client.MainComponents.Dashboard
+@using Rise.Client.MainComponents.Filtering
+@using Rise.Client.Pages.Events.Components
+@using Rise.Shared.Common
+@using Rise.Shared.Events
+@using Rise.Shared.News
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Events
+@inject IEventService EventService
+@inject IStringLocalizer<Events> Loc
+
+<div>
+    <NewsCarousel Events="_carouselEvents"/>
+    
+    <div class="filter-section">
+        <Filtering Items="@_filters"
+                   SelectedItem="@_selectedFilter"
+                   SelectedItemChanged="@OnFilterChanged" 
+                   SearchTermChanged="@OnSearchTermChanged"
+                   Placeholder="@Loc["SearchEvent"].Value"/>
+    </div>
+    
+    <div class="eventcards-section">
+        <h3>@Loc["LatestEvents"]</h3>
+        
+        @if (!_eventItems.Any())
+        {
+            <AlertSection 
+                Title="@Loc["Oops"].Value" 
+                Message="@Loc["NoEventsFound"].Value" 
+                Severity="Severity.Info"/>
+        }
+        else
+        {
+            @foreach (var item in _eventItems)
+            {
+                <EventSmallCard Event="item"/>
+            }
+            
+            <div class="d-flex justify-center mt-4">
+                <MudPagination 
+                    Color="Color.Primary" 
+                    Count="@_pageCount"
+                    Selected="@SelectedPage"
+                    SelectedChanged="@OnPageChanged"
+                    BoundaryCount="1"
+                    MiddleCount="1"
+                    Variant="Variant.Text"/>
+            </div>
+        }
+    </div>
+</div>

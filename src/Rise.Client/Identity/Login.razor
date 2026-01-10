@@ -1,0 +1,62 @@
+@page "/login"
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@inject IConfiguration Config
+
+<PageTitle>@Loc["Login"]</PageTitle>
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+@inject IStringLocalizer<Resources.Identity.Login> Loc
+
+<div class="loginpage-container">
+    <div class="foto-container">
+        <picture>
+            <source srcset="@($"{Config["ImageBasePath"]}/LoginHeader.jpg")" media="(max-width: 767px)">
+            <source srcset="@($"{Config["ImageBasePath"]}/LoginHeaderDesktop.jpg")" media="(min-width: 768px)">
+            <img class="foto-top" src="@($"{Config["ImageBasePath"]}/LoginHeader.jpg")" alt="@Loc["ImageAlt"]">
+        </picture>
+    </div>
+    <div class="login-container">
+        <h1 class="login-title">Login</h1>
+        @foreach (var error in _result.Errors)
+        {
+            <div class="notification is-danger mb-18" style="border-radius:0">@error</div>
+        }
+        <div class="form-container">
+            <EditForm Model="_model" OnValidSubmit="LoginUser" Context="_">
+                <FluentValidationValidator/>
+                <div class="input-section">
+                    <div class="field">
+                        <label class="label">@Loc["Email"]</label>
+                        <ValidationMessage For="() => _model.Email" class="error-message"/>
+                        <div class="inputfield">
+                            <InputText @bind-Value="_model.Email" type="email" autocomplete="username" class="input"/>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">@Loc["Password"]</label>
+                        <ValidationMessage For="() => _model.Password" class="error-message"/>
+                        <div class="inputfield">
+                            <InputText @bind-Value="_model.Password" class="input" type="password"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-section">
+                    <button type="submit" class="login-button">@Loc["LogIn"]</button>
+                    <button type="button" class="dev-login-button" @onclick="DevLogin">
+                        <div class="dev-button-inhoud">
+                            <img src="@($"{Config["ImageBasePath"]}/MicrosoftLogo.png")" alt="Microsoft Logo"/>
+                            @Loc["MicrosoftLogin"]
+                        </div>
+                    </button>
+                </div>
+            </EditForm>
+        </div>
+        <div class="gast-container">
+            <p class="gast-login">
+                <a href="/">@Loc["ContinueAs"]&nbsp;<strong>@Loc["Guest"]</strong></a>
+            </p>
+        </div>
+    </div>
+</div>

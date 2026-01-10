@@ -1,0 +1,62 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Dashboard
+@using Rise.Client.Pages.Timetable.Components
+@using Rise.Client.Resources.Pages.Timetable
+@using Rise.Shared.Deadlines
+@inject IStringLocalizer<Timetable> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div>
+    <div class="rest">
+        <div class="day-selector">
+            <DaySelector OnDayChanged="HandleDayChanged" ForceActiveDay="SelectedDay"/>
+        </div>
+
+        <div class="lessons-container">
+            @if (FilteredDeadlinesForDay.Any())
+            {
+                <div class="mb-3">
+                    @if (FilteredDeadlinesForDay.Count() == 1)
+                    {
+                        <AlertSection
+                            Title="Deadline:"
+                            Message="@($"{FilteredDeadlinesForDay.First().Title} {Loc["Om"]} {FilteredDeadlinesForDay.First().DueDate:HH:mm}")"
+                            Severity="Severity.Info"
+                            Link="/deadlines" />
+                    }
+                    else
+                    {
+                        <AlertSection
+                            Title="Deadlines:"
+                            Message="@string.Join("<br />", FilteredDeadlinesForDay.Select(d => $"{d.Title} {Loc["Om"]} {d.DueDate:HH:mm}"))"
+                            Severity="Severity.Info"
+                            Link="/deadlines" />
+                    }
+                </div>
+            }
+
+            @if (Lessons is null || !FilteredLessons.Any())
+            {
+                <NoLessons/>
+            }
+            else
+            {
+                @foreach (var lesson in FilteredLessons)
+                {
+                    <CourseItem DisplayType="false" Course="lesson" OnCourseSelected="ShowCourseDetails"/>
+                }
+            }
+        </div>
+    </div>
+
+    @if (_selectedCourse is not null)
+    {
+        <div class="overlay" @onclick="CloseDetails">
+            <div class="overlay-content">
+                <CourseDetails Course="_selectedCourse" OnClose="CloseDetails"/>
+            </div>
+        </div>
+    }
+</div>

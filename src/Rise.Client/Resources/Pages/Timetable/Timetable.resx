@@ -1,0 +1,72 @@
+<!-- timetable.resx (Dutch) -->
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Title" xml:space="preserve">
+        <value>Lessenrooster</value>
+    </data>
+    <data name="MyTimetable" xml:space="preserve">
+        <value>Mijn lessenrooster</value>
+    </data>
+    <data name="TeachersPlural" xml:space="preserve">
+        <value>Docenten:</value>
+    </data>
+    <data name="TeacherSingular" xml:space="preserve">
+        <value>Docent:</value>
+    </data>
+    <data name="ClassroomsPlural" xml:space="preserve">
+        <value>Lokalen:</value>
+    </data>
+    <data name="ClassroomSingular" xml:space="preserve">
+        <value>Lokaal:</value>
+    </data>
+    <data name="Type" xml:space="preserve">
+        <value>Type:</value>
+    </data>
+    <data name="Start" xml:space="preserve">
+        <value>Start:</value>
+    </data>
+    <data name="End" xml:space="preserve">
+        <value>Einde:</value>
+    </data>
+    <data name="NoLessons" xml:space="preserve">
+        <value>Je hebt geen les.</value>
+    </data>
+    <data name="ViewDeadlines" xml:space="preserve">
+        <value>Bekijk je deadlines</value>
+    </data>
+    <data name="Week" xml:space="preserve">
+        <value>Week</value>
+    </data>
+    <data name="Mon" xml:space="preserve">
+        <value>Ma</value>
+    </data>
+    <data name="Tue" xml:space="preserve">
+        <value>Di</value>
+    </data>
+    <data name="Wed" xml:space="preserve">
+        <value>Wo</value>
+    </data>
+    <data name="Thu" xml:space="preserve">
+        <value>Do</value>
+    </data>
+    <data name="Fri" xml:space="preserve">
+        <value>Vr</value>
+    </data>
+    <data name="Today" xml:space="preserve">
+        <value>Naar vandaag</value>
+    </data>
+    <data name="Om" xml:space="preserve">
+        <value>om</value>
+    </data>
+</root>

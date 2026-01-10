@@ -1,0 +1,115 @@
+/* PAGINA */
+.studentenkaart-pagina {
+    color: white;
+    padding: 20px 20px 110px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.studentenkaart-pagina-bg {
+    background-color: black;
+}
+
+.back-arrow-section {
+    padding: 30px 20px 0;
+}
+
+.back-arrow-section .back-link {
+    color: white;
+    margin-bottom: 0;
+}
+
+/* HOGENT */
+.studentenkaart-hogent {
+    background-color: white;
+    color: black;
+    padding: 10px;
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.top img{
+    height: 50px;
+    margin-right: 40px;
+}
+
+.top p{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.rest {
+    display: flex;
+    flex-direction: row;
+}
+
+.profielfoto {
+    height: 180px;
+    object-fit: contain;
+    margin-right: 20px;
+}
+
+.gegevens p{
+    font-size: 15px;
+}
+
+.vervaldatum {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.vervaldatum p {
+    font-size: 14px;
+}
+
+.barcode img{
+    height: 50px;
+}
+
+.rechts {
+    margin-left: 8px;
+}
+
+/* DATUM EN TIJD */
+.datum-en-tijd {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.datum-en-tijd p {
+    color: white;
+    font-weight: bold;
+}
+
+.back-link {
+    width: fit-content;
+    transform: scaleX(-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    position: static;
+}
+
+
+.back-link:hover {
+    background-color: black;
+}
+

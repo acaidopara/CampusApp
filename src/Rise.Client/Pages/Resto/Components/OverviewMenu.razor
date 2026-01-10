@@ -1,0 +1,36 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Resto
+@using Rise.Shared.Resto
+@inject IStringLocalizer<Resto> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div class="weekmenu">
+    <div class="weekmenu-resto">
+        <p>@GeselecteerdeResto</p>
+    </div>
+    <MudTabs>
+        @if (RestoMenusStructured.TryGetValue(GeselecteerdeResto, out var menu))
+        {
+            @foreach (var pair in menu.Items)
+            {
+                <MudTabPanel Text="@pair.Key">
+                    <MenuGroupWrapper GroupName="@pair.Key" Entries="@pair.Value" />
+                </MudTabPanel>
+            }
+        }
+        else
+        {
+            <MudTabPanel Text="Ma">
+                <p>@Loc["NoMenuFound"]</p>
+            </MudTabPanel>
+        }
+    </MudTabs>
+</div>
+
+@code {
+    [Parameter] public required string GeselecteerdeResto { get; set; }
+    [Parameter] public required Dictionary<string, MenuDto>  RestoMenusStructured { get; set; }
+
+}

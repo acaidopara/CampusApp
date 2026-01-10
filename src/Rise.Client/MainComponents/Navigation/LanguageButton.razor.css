@@ -1,0 +1,12 @@
+.language-switch {
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: bold;
+}

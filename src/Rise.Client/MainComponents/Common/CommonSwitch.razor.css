@@ -1,0 +1,43 @@
+.custom-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 10px 0;
+    border: 0;
+}
+.custom-switch:last-child {
+    border-bottom: none;
+}
+
+.switch-track {
+    width: 51px;
+    height: 28px;
+    background-color: var(--secondary-color);
+    border-radius: 15.5px;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.switch-thumb {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    transition: transform 0.3s ease;
+}
+
+.switch-track.checked {
+    background-color: black;
+}
+
+.switch-track .switch-thumb {
+    transform: translateX(0);
+}
+
+.switch-track.checked .switch-thumb {
+    transform: translateX(-23px);
+}

@@ -1,0 +1,18 @@
+::deep .news-search-container {
+    width: 100%;
+    max-width: 400px;
+    
+}
+
+::deep .news-search {
+    background-color: #f5f5f5;
+    border-radius: 30px;
+}
+
+::deep .mud-input-slot  {
+    padding: 10px 0 10px 10px !important;
+}
+
+::deep .mud-input-outlined-border {
+    border: none !important;
+}

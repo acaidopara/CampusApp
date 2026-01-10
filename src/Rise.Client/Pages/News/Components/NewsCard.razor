@@ -1,0 +1,28 @@
+@using System.Text.RegularExpressions
+@using Rise.Shared.News
+@inject IConfiguration Config
+
+<a href="/nieuws-en-events/nieuws/@News.Id">
+    <div class="news-card-content">
+        <div>
+            <img src="@($"{Config["ImageBasePath"]}/{@News.ImageUrl}")" alt="@News.Title" class="news-card-image"/>
+        </div>
+        <div class="news-card-text">
+            <TopicLabel Label="@News.Subject"/>
+            <h3 class="news-card-title">@News.Title</h3>
+            <p class="news-card-date">@News.Date.ToString("dd/MM/yyyy")</p>
+            <p class="news-card-description">@ShortenContent(News.Content)</p>
+        </div>
+    </div>
+</a>
+
+@code {
+    [Inject] NavigationManager NavigationManager { get; set; } = null!;
+    [Parameter, EditorRequired] public NewsDto.Detail News { get; set; } = null!;
+
+    private string ShortenContent(string content)
+    {
+        var plainText = Regex.Replace(content, "<.*?>", string.Empty).Trim();
+        return plainText.Length > 90 ? plainText.Substring(0, 90) + "..." : content;
+    }
+}

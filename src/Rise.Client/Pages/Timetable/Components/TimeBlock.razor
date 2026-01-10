@@ -1,0 +1,10 @@
+<div class="class-schedule-time">
+    <p>@($"{StartTime:HH:mm}")</p>
+    <p class="stripe">-</p>
+    <p>@($"{EndTime:HH:mm}")</p>   
+</div>
+
+@code {
+    [Parameter] public DateTime StartTime { get; set; }
+    [Parameter] public DateTime EndTime { get; set; }
+}

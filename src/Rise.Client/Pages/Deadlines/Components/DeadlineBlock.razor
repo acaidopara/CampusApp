@@ -1,0 +1,29 @@
+<!-- Reworked DeadlineBlock.razor -->
+@using Rise.Shared.Deadlines
+@using Rise.Client.MainComponents.Dashboard
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Deadlines
+@inject IDeadlineService DeadlineService
+@inject IStringLocalizer<Deadline> Loc
+@inject NavigationManager Nav
+
+<div class="deadline-card @(IsLoading ? "loading" : "")">
+    <div class="event-content" @onclick="OnClick">
+        <DateBlock Date="@Deadline.DueDate" MonthFormat="MMM" />
+        <div class="deadline-info">
+            <div class="deadline-text">
+                <p>@Deadline.Course</p>
+                <h3>@Deadline.Title</h3>
+                <p>@Deadline.DueDate.ToString("HH:mm")</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code
+{
+    private void OnClick()
+    {
+        Nav.NavigateTo("https://chamilo.hogent.be/",false);
+    }
+}

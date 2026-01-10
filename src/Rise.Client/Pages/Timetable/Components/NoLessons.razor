@@ -1,0 +1,13 @@
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.Resources.Pages.Timetable
+@inject IStringLocalizer<Timetable> Loc
+
+<div class="container">
+    <div class="no-lessons">
+        <p>@Loc["NoLessons"]</p>
+        <div>
+            <CommonLinkButton Href="/deadlines" Text=@Loc["ViewDeadlines"].Value/>
+        </div>
+    </div>
+</div>

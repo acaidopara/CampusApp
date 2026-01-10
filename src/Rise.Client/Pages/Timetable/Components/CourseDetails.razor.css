@@ -1,0 +1,88 @@
+.course-details {
+    padding: 20px;
+    margin: 10px;
+    z-index: 5000;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.header h2 {
+    width: 85%;
+}
+
+.btn-close {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    position: absolute;
+    top: 26px;
+    right: 20px;
+}
+
+.space {
+    margin-bottom: 20px;
+}
+
+.space p {
+    margin-bottom: 10px;
+}
+
+.space p span:nth-of-type(2) {
+    margin-top: 10px;
+}
+
+.course-details div p {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.4rem;
+}
+
+.course-details div p i {
+    width: 20px;
+    text-align: center;
+    padding-top: 3px;
+    color: var(--secondary-color);
+}
+
+.circle {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
+
+.course-info p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.course-info .label {
+    width: 55px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+.course-info .value {
+    flex: 1;
+    margin-top: 10px;
+}
+
+.classroom-description {
+    color: var(--secondary-color);
+    font-style: italic;
+}
+
+.classroom-description:hover {
+    text-decoration: underline;
+}

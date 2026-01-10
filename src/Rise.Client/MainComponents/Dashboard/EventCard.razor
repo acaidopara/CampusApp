@@ -1,0 +1,24 @@
+@using Rise.Shared.Events
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.Resources.MainComponents.Dashboard
+@inject IConfiguration Config
+
+
+@inject IStringLocalizer<Dashboard> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div class="event-card" style="background-image: url('@($"{Config["ImageBasePath"]}/{@Event.ImageUrl}")');">
+    <div class="event-gradient-overlay"></div>
+    <div class="event-content">
+        <DateBlock EventDate="@Event.Date.Date" MonthFormat="MMM" />
+        <div class="event-info">
+            <h3>@Event.Title</h3>
+            <a href="/nieuws-en-events/events/@Event.Id">
+                @Loc["ReadMore"]
+                <MudIcon Icon="@Icons.Material.Outlined.ArrowRightAlt" Title="@Loc["Arrow"]" />
+            </a>
+        </div>
+    </div>
+</div>

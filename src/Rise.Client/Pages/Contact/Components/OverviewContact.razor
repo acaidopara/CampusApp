@@ -1,0 +1,87 @@
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Dashboard
+@using Rise.Client.MainComponents.Filtering
+@using Rise.Client.Resources.Pages.Contact
+@using Rise.Shared.Departments
+@inject IStringLocalizer<Contact> Loc
+
+
+
+<SearchBar SearchTerm=@_searchTerm SearchTermChanged="UpdateSearchTerm" PlaceHolderText="@Loc["SearchDepartment"]" />
+<div class="mt-6 mb-12">
+    @if (FilteredDepartments.Any())
+    {
+        <h3>@Loc["DepartmentsGOSKASK"]</h3>
+        <ul>
+            @foreach (var dept in FilteredDepartments)
+            {
+                <li class="contact-item">
+                    <a @onclick="() => OnSelectDepartment.InvokeAsync(dept)">
+                        @dept.Name
+                    </a>
+                </li>
+            }
+        </ul>
+        <br/>
+    }
+    @if (FilteredManagers.Any())
+    {
+        <h3>@Loc["Managements"]</h3>
+        <ul>
+            @foreach (var dept in FilteredManagers)
+            {
+                <li class="contact-item">
+                    <a @onclick="() => OnSelectDepartment.InvokeAsync(dept)">
+                        @dept.Name
+                    </a>
+                </li>
+            }
+        </ul>
+        <br/>
+    }
+    @if (FilteredOthers.Any())
+    {
+        <h3>@Loc["Other"]</h3>
+        <ul>
+            @foreach (var dept in FilteredOthers)
+            {
+                <li class="contact-item">
+                    <a @onclick="() => OnSelectDepartment.InvokeAsync(dept)">
+                        @dept.Name
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+    @if (!FilteredDepartments.Any() 
+         && !FilteredManagers.Any() 
+         && !FilteredOthers.Any())
+    {
+        <AlertSection Title="@Loc["NoResults"].Value" Message="@Loc["NoResultsMessage"].Value" Severity="Severity.Info"/>
+    }
+
+</div>
+
+@code {
+    [Parameter] public required IEnumerable<DepartmentDto.Index> Departments { get; set; }
+    [Parameter] public required IEnumerable<DepartmentDto.Index> Managers { get; set; }
+    [Parameter] public required IEnumerable<DepartmentDto.Index> Others { get; set; }
+    [Parameter] public EventCallback<DepartmentDto.Index> OnSelectDepartment { get; set; }
+
+    private string _searchTerm = string.Empty;
+
+    private IEnumerable<DepartmentDto.Index> FilteredDepartments => 
+        Departments.Where(d => string.IsNullOrWhiteSpace(_searchTerm) || d.Name.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase));
+
+    private IEnumerable<DepartmentDto.Index> FilteredManagers => 
+        Managers.Where(d => string.IsNullOrWhiteSpace(_searchTerm) || d.Name.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase));
+
+    private IEnumerable<DepartmentDto.Index> FilteredOthers => 
+        Others.Where(d => string.IsNullOrWhiteSpace(_searchTerm) || d.Name.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase));
+
+    private Task UpdateSearchTerm(string value)
+    {
+        _searchTerm = value;
+        return Task.CompletedTask;
+    }
+}

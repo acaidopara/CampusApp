@@ -1,0 +1,33 @@
+@page "/nieuws-en-events"
+@using Rise.Client.Components.Events
+@using Rise.Client.Pages.News.Components
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.Resources.Pages.News
+
+@inject NavigationManager NavigationManager
+@inject IStringLocalizer<News> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+@if (_isLoading)
+{
+    <Loader/>
+}
+else
+{
+    <div class="news-page">  
+        <MudSwipeArea OnSwipeEnd="HandleSwipeEnd" Class="swipe" Style="touch-action: pan-y">
+            <MudTabs @bind-ActivePanelIndex="_activeTabIndex" Centered="true">
+                <MudTabPanel Text="@Loc["Title"].Value">
+                    <NewsContent/>
+                </MudTabPanel>
+
+                <MudTabPanel Text="@Loc["Events"].Value">
+                    <EventContent/>
+                </MudTabPanel>
+            </MudTabs>
+        </MudSwipeArea>
+    </div>
+}

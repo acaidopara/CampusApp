@@ -1,0 +1,6 @@
+<div  Class="@("custom-switch " + (WithBorder?"border":""))" @onclick="Toggle">
+    <span class="switch-label dynamic">@Label</span>
+    <div class="switch-track @(!Checked ? "checked" : "")">
+        <div class="switch-thumb"></div>
+    </div>
+</div>

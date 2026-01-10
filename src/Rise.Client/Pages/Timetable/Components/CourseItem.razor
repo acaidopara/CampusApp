@@ -1,0 +1,49 @@
+@using Rise.Shared.Lessons
+
+<div class="class-schedule-block" @onclick="() => OnCourseSelected.InvokeAsync(Course!.Id)">
+    @if (Course is not null)
+    {
+        <TimeBlock StartTime="@Course.Start" EndTime="@Course.End"/>
+    
+        <div class="class-schedule-info">
+            <h2 class="course-name">@Course.Name</h2>
+            <div class="courses">
+                @if (Course.ClassroomDtos.Count > 0)
+                {
+                    if (Course.ClassroomDtos.Count == 1)
+                    {
+                        <p>@Course.ClassroomDtos[0].Description</p>
+                    }
+                    else
+                    {
+                        <p>@((MarkupString)string.Join("<br />", Course.ClassroomDtos.Select(c => c.Description)))</p>
+                    }
+                }
+            </div>
+            @if (DisplayType)
+            {
+                <p class="course-type">@Course.LessonType</p>
+            }
+            <div class="teachers">
+                @if (Course.TeacherNames.Count > 0)
+                {
+                    if (Course.TeacherNames.Count == 1)
+                    {
+                        <p>@Course.TeacherNames[0]</p>
+                    }
+                    else
+                    {
+                        <p>@((MarkupString)string.Join("<br />", Course.TeacherNames))</p>
+                    }
+                }
+            </div>
+        </div>
+    }
+</div>
+
+
+@code {
+    [Parameter] public LessonDto.Index? Course { get; set; }
+    [Parameter] public bool DisplayType { get; set; }
+    [Parameter] public EventCallback<int> OnCourseSelected { get; set; }
+}

@@ -1,0 +1,53 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="LogIn" xml:space="preserve">
+  <value>Log in</value>
+</data>
+    <data name="Email" xml:space="preserve">
+  <value>Email</value>
+</data>
+    <data name="Password" xml:space="preserve">
+  <value>Password</value>
+</data>
+    <data name="DevelopmentLogin" xml:space="preserve">
+  <value>Development Login</value>
+</data>
+    <data name="ContinueAs" xml:space="preserve">
+        <value>Continue as</value>
+    </data>
+    <data name="ImageAlt" xml:space="preserve">
+        <value>2 smiling students</value>
+    </data>
+    <data name="Guest" xml:space="preserve">
+        <value>Guest</value>
+    </data>
+    <data name="EmailRequired" xml:space="preserve">
+        <value>Email is required</value>
+    </data>
+    <data name="EmailInvalid" xml:space="preserve">
+        <value>Email is invalid</value>
+    </data>
+    <data name="PwdInvalid" xml:space="preserve">
+        <value>Password is invalid</value>
+    </data>
+    <data name="LoggedOut" xml:space="preserve">
+        <value>You have been succesfully logged out!</value>
+    </data>
+    <data name="OfflineMessage" xml:space="preserve">
+        <value>You are offline. Login is not possible. Please check your internet connection and try again.</value>
+    </data>
+    <data name="MicrosoftLogin" xml:space="preserve">
+        <value>Microsoft Login</value>
+    </data>
+</root>

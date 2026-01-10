@@ -1,0 +1,53 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Deadlines
+@using Rise.Shared.Deadlines
+@using Rise.Client.MainComponents.Dashboard
+
+@inject IStringLocalizer<Deadline> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+@if (IsLoading)
+{
+    <div class="has-text-centered p-5">
+        <div class="loader"></div> @* dit kan MudBlazor of eigen spinner zijn *@
+        <p>@Loc["Loading"]</p>
+    </div>
+}
+else
+{
+<h2 class="subtitle">@Loc["UpcomingDeadlinesCount", UpcomingDeadlines.Count()]</h2>
+<div class="columns is-multiline">
+    @foreach (var deadline in UpcomingDeadlines)
+    {
+        <div class="column is-full-mobile is-half-tablet is-one-third-desktop" @key="deadline.Id">
+            <DeadlineBlock Deadline="deadline" OnCompletedChanged="OnCompletedChange"/>
+        </div>
+    }
+    @if (!UpcomingDeadlines.Any())
+    {   
+        <div class="column">
+            <AlertSection 
+                Title="@Loc["Oops"].Value" 
+                Message="@Loc["NoUpcomingDeadlines"].Value" 
+                Severity="Severity.Info"/>
+        </div>
+    }
+</div>
+}
+
+@code {
+    [Parameter] public required IEnumerable<DeadlineDto.Index> UpcomingDeadlines { get; set; }
+    [Parameter] public EventCallback UpdateUi { get; set; }
+    [Parameter] public bool IsLoading { get; set; }
+
+    private async Task OnCompletedChange()
+    {
+        if (UpdateUi.HasDelegate)
+        {
+            await UpdateUi.InvokeAsync();
+        }
+    }
+
+}

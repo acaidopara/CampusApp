@@ -1,0 +1,62 @@
+@page "/studenten-deals"
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.MainComponents.Dashboard
+@using Rise.Client.MainComponents.Filtering
+@using Rise.Client.Resources.Pages.CampusLife
+@using Rise.Client.Pages.CampusLife.Components
+
+@inject IStringLocalizer<CampusLife> Loc
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+@if (_isLoading)
+{
+    <Loader></Loader>
+}
+else
+{
+    
+    <div>
+        <LetterHeader ImageName="banner-deals.jpg" Title="Studenten-deals" BackLinkUrl="" />
+
+        <div class="page px-lg-13">
+            <Filtering Items="@_filters"
+                       SelectedItem="@_selectedFilter"
+                       SelectedItemChanged="@OnFilterChanged"
+                       SearchTermChanged="@OnSearchTermChanged"
+                       Placeholder="@Loc["SearchDeal"].Value"/>
+
+            @if (!_deals.Any())
+            {
+                <div class="mt-10">
+                    <AlertSection
+                        Title="@Loc["Oops"].Value"
+                        Message="@Loc["NoDealsFound"].Value"
+                        Severity="Severity.Info"/>
+                </div>
+            }
+            else
+            {
+                <div class="mt-12 mb-12 promo-card-container">
+                    @foreach (var item in _deals)
+                    {
+                        <DealCard Deal="item" />
+                    }
+                </div>
+            
+                <div class="d-flex justify-center mt-4">
+                    <MudPagination
+                        Color="Color.Primary"
+                        Count="@_pageCount"
+                        Selected="@SelectedPage"
+                        SelectedChanged="@OnPageChanged"
+                        BoundaryCount="1"
+                        MiddleCount="1"
+                        Variant="Variant.Text"/>
+                </div>
+            }
+        </div>
+    </div>
+
+}

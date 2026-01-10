@@ -1,0 +1,23 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Resources.Layout.LetterHeader.LetterHeader> Loc
+@inject IConfiguration Config
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+<div class="header">
+    @if (BackLinkUrl is not null)
+    {
+        <a href="@BackLinkUrl" class="back-link">
+            <MudIcon Icon="@Icons.Material.Filled.ArrowRightAlt" Title="Back"/>
+        </a>
+    }
+    <div class="image-container">
+        <img src="@($"{Config["ImageBasePath"]}/{ImageName}")" alt="pageHeader"/>
+        <div class="image-overlay"></div>
+        <div class="title pl-lg-20">
+            <p>@Loc[Title].Value[0]</p>
+            <h2>@Loc[Title].Value</h2>
+        </div>
+    </div>
+</div>

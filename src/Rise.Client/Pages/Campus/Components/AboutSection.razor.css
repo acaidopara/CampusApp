@@ -1,0 +1,14 @@
+.about-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.read-more {
+    font-size: 1rem;
+    text-align: right;
+    margin-top: 10px;
+    font-style: italic;
+    text-decoration: underline;
+    color: var(--secondary-color);
+}

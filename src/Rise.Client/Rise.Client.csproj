@@ -1,0 +1,137 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+        <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+        <NoWarn>$(NoWarn);CS8669</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Blazor.LocalStorage" Version="9.0.1" />
+        <PackageReference Include="Blazored.FluentValidation" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="9.0.9" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.9" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.9" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.9" PrivateAssets="all" />
+        <PackageReference Include="MudBlazor" Version="8.13.0" />
+        <PackageReference Include="Serilog.Sinks.BrowserConsole" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Localization" Version="9.0.9" />
+        <PackageReference Include="Blazor.WebAssembly.DynamicCulture" Version="3.1.0" />
+        <PackageReference Include="Blazor.WebAssembly.DynamicCulture.Loader" Version="3.1.0" />
+        <PackageReference Include="BlazorPanzoom" Version="0.2.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Ardalis.Result" />
+        <Using Include="Serilog" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Rise.Shared\Rise.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="wwwroot\Images\logo-icon.png" />
+        <None Update="Pages\News\Content\Swipe.css">
+          <DependentUpon>NewsPage.razor</DependentUpon>
+        </None>
+        <None Update="Pages\Contact\Content\ContactPage.css">
+          <DependentUpon>ContactPage.razor</DependentUpon>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Resources\Identity\Login.resx">
+          <Generator>PublicResXFileCodeGenerator</Generator>
+          <LastGenOutput>Login.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Campus\Campus.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Campus.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Campus\Campus.en.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Campus.en.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\CampusLife\CampusLife.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>CampusLife.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\CampusLife\CampusLife.en.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>CampusLife.en.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\MainComponents\Filtering\Filter.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Filter.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Layout\LetterHeader\LetterHeader.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>LetterHeader.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Notifications\Notifications.resx">
+          <Generator>PublicResXFileCodeGenerator</Generator>
+          <LastGenOutput>Notifications.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Resources\Identity\Login.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Login.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Campus\Campus.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Campus.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\CampusLife\CampusLife.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>CampusLife.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\MainComponents\Filtering\Filter.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Filter.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Layout\LetterHeader\LetterHeader.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>LetterHeader.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Notifications\Notifications.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Notifications.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Remove="wwwroot\**\*.gz;wwwroot\**\*.br;_content\**\*.gz;_content\**\*.br" />
+        <None Include="wwwroot\**\*.gz;wwwroot\**\*.br;_content\**\*.gz;_content\**\*.br" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Rise.Client.Tests" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="wwwroot\_content\BlazorPanzoom\blazorpanzoom.js" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+        <GenerateServiceWorkerAssetsManifest>true</GenerateServiceWorkerAssetsManifest>
+    </PropertyGroup>
+    
+    <ItemGroup>
+         <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+    </ItemGroup>
+</Project>

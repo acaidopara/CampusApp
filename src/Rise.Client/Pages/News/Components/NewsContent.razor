@@ -1,0 +1,53 @@
+@using Rise.Client.MainComponents.Dashboard
+@using Rise.Client.MainComponents.Filtering
+@using Rise.Shared.Common
+@using Rise.Shared.News
+@namespace Rise.Client.Pages.News.Components
+@inject INewsService NewsService
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.News
+@using Rise.Shared.Events
+
+@inject IStringLocalizer<News> Loc
+
+<div>
+    <NewsCarousel News="_carouselNews"/>
+    
+    <div class="filter-section">
+        <Filtering Items="@_filters"
+                   SelectedItem="@_selectedFilter"
+                   SelectedItemChanged="@OnFilterChanged"
+                   SearchTermChanged="@OnSearchTermChanged"
+                   Placeholder="@Loc["SearchArticle"].Value"/>
+    </div>    
+    
+    <div class="news-articles-section">
+        <h3>@Loc["LatestNews"]</h3>
+        
+        @if (!_newsItems.Any())
+        {
+            <AlertSection 
+                Title="@Loc["Oops"].Value" 
+                Message="@Loc["NoArticlesFound"].Value" 
+                Severity="Severity.Info"/>
+        }
+        else
+        {
+            @foreach (var item in _newsItems)
+            {
+                <NewsCard News="item" />
+            }
+            
+            <div class="d-flex justify-center mt-4">
+                <MudPagination 
+                    Color="Color.Primary" 
+                    Count="@_pageCount"
+                    Selected="@SelectedPage"
+                    SelectedChanged="@OnPageChanged"
+                    BoundaryCount="1"
+                    MiddleCount="1"
+                    Variant="Variant.Text"/>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,52 @@
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.Resources.MainComponents.Navigation
+@inject IStringLocalizer<Navigation> Loc
+@inject IConfiguration Config
+@inherits NavBase
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div>
+    <MudIconButton Icon="@CurrentIcon"
+                   Color="Color.Inherit"
+                   OnClick="ToggleMenu"
+                   Class="hamburger-btn" />
+    @if (_isMenuOpen)
+    {
+        <div class="hamburger-fullscreen">
+            <div class="hamburger-header">
+                <img src="@($"{Config["ImageBasePath"]}/HOGENT_Logo_Wit.png")" alt="@Loc["HogentLogo"]" style="height:38px;" />
+                <MudSpacer />
+                <div class="header-icons">
+                    @if (IsAuthenticated)
+                    {
+                        <div class="notification-wrapper">
+                            <MudIconButton Href="notificaties" Icon="@Icons.Material.Filled.Notifications" Color="Color.Inherit" />
+                            @if (_unreadCount > 0)
+                            {
+                                <span class="notification-badge"></span>
+                            }
+                        </div>
+                    }
+                    <MudIconButton Icon="@Icons.Material.Filled.Close" Color="Color.Inherit" OnClick="ToggleMenu" />
+                </div>
+            </div>
+            <div class="hamburger-body">
+                <MudNavLink Href="/instellingen" Class="menu-link"><p>@Loc["AppSettings"]</p></MudNavLink>
+                <MudNavLink Href="/it-support" Class="menu-link"><p>@Loc["ITSupport"]</p></MudNavLink>
+                <MudNavLink Href="/contact" Class="menu-link"><p>@Loc["ContactAndHelp"]</p></MudNavLink>
+                <MudNavLink Href="/snelkoppelingen" Class="menu-link"><p>@Loc["Snelkoppelingen"]</p></MudNavLink>
+                <AuthorizeView>
+                    <Authorized>
+                        <MudButton Href="logout" StartIcon="@Icons.Material.Filled.Logout" Class="logout-btn">@Loc["Logout"]</MudButton>
+                    </Authorized>
+                    <NotAuthorized>
+                        <MudButton Href="login" StartIcon="@Icons.Material.Filled.Login" Class="logout-btn">@Loc["Login"]</MudButton>
+                    </NotAuthorized>
+                </AuthorizeView>
+                <LanguageButton></LanguageButton>
+            </div>
+        </div>
+    }
+</div>

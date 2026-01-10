@@ -1,0 +1,23 @@
+<div class="usercard">
+    <MudAvatar Color="Color.Secondary" Size="Size.Large">
+        @if (@Avatar is not null)
+        {
+            <MudImage Src="@Avatar"></MudImage>
+        }
+        else
+        {
+            @Name[0]
+        }
+    </MudAvatar>
+    <div class="info">
+        <p>@Name</p>
+        <p>@Function</p>
+    </div>
+    
+</div>
+
+@code {
+    [Parameter] public required string Name { get; set; }
+    [Parameter] public required string Function { get; set; }
+    [Parameter] public string? Avatar { get; set; }
+}

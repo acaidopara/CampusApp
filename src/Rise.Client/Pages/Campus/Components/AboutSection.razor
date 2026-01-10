@@ -1,0 +1,11 @@
+<div class="about-section">
+    <h3>@Title</h3>
+    <p>@(ShowFull ? Description : ShortDescription)</p>
+
+    @if (Description.Length > MaxLength)
+    {
+        <a @onclick="ToggleShowFull" class="read-more">
+            @(ShowFull ? ReadLessText : ReadMoreText)
+        </a>
+    }
+</div>

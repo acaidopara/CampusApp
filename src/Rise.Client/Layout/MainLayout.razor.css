@@ -1,0 +1,21 @@
+main {
+    margin-top: 64px;
+}
+
+main section {
+    padding-top: 0;
+}
+
+.offline-alert {
+    margin: 15px 70px 15px;
+}
+
+@media (max-width: 1279px) {
+    main {
+        margin-bottom: 80px;
+    }
+
+    .offline-alert {
+        margin: 30px 30px 15px;
+    }
+}

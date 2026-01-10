@@ -1,0 +1,23 @@
+<a href="@LinkUrl"
+   @onclick="HandleClick"
+   @onclick:preventDefault="true"
+   @onclick:stopPropagation="true">
+    <div class="quicklink-item">
+        <div class="quicklink-icon">
+            @if (!string.IsNullOrEmpty(Icon))
+            {
+                <i class="@Icon"
+                   title="@Label"
+                   style="@(string.IsNullOrEmpty(Colour) ? "" : $"color:{Colour}")">
+                </i>
+            }
+            else
+            {
+                <span style="@(string.IsNullOrEmpty(Colour) ? "" : $"color:{Colour}")">
+                    @Label
+                </span>
+            }
+        </div>
+        <p>@Title</p>
+    </div>
+</a>

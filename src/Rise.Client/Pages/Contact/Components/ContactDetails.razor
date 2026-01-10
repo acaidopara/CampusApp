@@ -1,0 +1,37 @@
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Dashboard
+@using Rise.Client.Resources.Pages.Contact
+@using Rise.Shared.Users
+@inject IStringLocalizer<Contact> Loc
+
+<h2>
+    @CurrentDepartmentName
+</h2>
+
+@if (Manager != null)
+{
+    <div>
+ 
+            <div>
+                <ContactBlock Firstname="@Manager.FirstName" 
+                              Lastname="@Manager.LastName" 
+                              Title="@Manager.Title" 
+                              Email="@Manager.Email" />
+            </div>
+        
+    </div>
+}
+else
+{
+    <AlertSection 
+        Title="@Loc["NoContactsFound"].Value" 
+        Message="" 
+        Severity="Severity.Info">
+    </AlertSection>
+}
+
+@code {
+    [Parameter] public EventCallback BackToOverView { get; set; }
+    [Parameter] public required string CurrentDepartmentName { get; set; }
+    [Parameter] public UserDto.Index? Manager { get; set; }
+}

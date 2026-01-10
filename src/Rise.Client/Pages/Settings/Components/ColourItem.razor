@@ -1,0 +1,19 @@
+<button 
+    class="colour-item @(IsSelected ? "selected" : "")"
+    style="background-color:@Colour"
+    @onclick="OnClick">
+</button>
+
+@code {
+    [Parameter] public required string Colour { get; set; }
+    [Parameter] public bool IsSelected { get; set; }
+    [Parameter] public EventCallback<string> OnSelected { get; set; }
+
+    private async Task OnClick()
+    {
+        if (OnSelected.HasDelegate)
+        {
+            await OnSelected.InvokeAsync(Colour);
+        }
+    }
+}

@@ -1,0 +1,33 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Shared.CampusLife.StudentDeals
+
+@inject IConfiguration Config
+@inject IStringLocalizer<Resources.MainComponents.Filtering.Filter> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+<a href="/studenten-deals/@Deal.Id">
+    <div class="promo-card" style="background-image: url(@($"{Config["ImageBasePath"]}/{Deal.ImageUrl}")">
+        <div class="image-overlay"></div>
+        <div class="header-content">
+            <div class="labels-container">
+                @if (Deal.Discount != 0)
+                {
+                    <span class="discount-label">-@Deal.Discount%</span>
+                }
+                <span class="category-label">@Loc[Deal.PromoCategory]</span>
+            </div>
+            <div>
+                <h3>@Deal.Name</h3>
+                <p>@Deal.Store</p>
+            </div>
+        </div>
+    </div>
+</a>
+
+@code {
+    [Parameter] public required StudentDealDto.Index Deal { get; set; }
+    [Inject] NavigationManager NavigationManager { get; set; } = default!;
+}
+

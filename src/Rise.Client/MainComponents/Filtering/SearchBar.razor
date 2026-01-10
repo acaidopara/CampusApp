@@ -1,0 +1,11 @@
+<div class="news-search-container">
+    <MudTextField Value="SearchTerm"
+                  ValueChanged="@(v => OnSearchChanged(v))"
+                  T="string"
+                  Immediate="true"
+                  Placeholder="@PlaceHolderText"
+                  Adornment="Adornment.Start"
+                  AdornmentIcon="@Icons.Material.Outlined.Search"
+                  Variant="Variant.Outlined"
+                  Class="news-search" />
+</div>

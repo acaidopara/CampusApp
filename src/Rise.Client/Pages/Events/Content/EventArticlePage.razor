@@ -1,0 +1,42 @@
+@page "/nieuws-en-events/events/{EventId:int}"
+@using Rise.Client.MainComponents.Common
+@using Rise.Shared.Events
+@using Rise.Client.Pages.Events.Components
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.Resources.Pages.Events
+
+@inject IEventService EventService
+@inject IStringLocalizer<Events> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+@if (_article is null)
+{
+    <Loader ShowBackButton="true" Text="@Loc["ArticleLoading"]" />
+}
+else
+{
+    <div class="event-article-page">
+        <div>
+            <ArticleHeader Article="_article" />
+        </div>
+        <div class="info-section">
+            <div class="article-sidebar">
+                <InfoCard Event="_article" />
+
+                @if (!string.IsNullOrWhiteSpace(_article.RegisterLink))
+                {
+                    <div class="mb-7">
+                        <CommonLinkButton Text="@Loc["Register"].Value" Href="@_article.RegisterLink" />
+                    </div>
+                }
+            </div>
+
+            <div class="article-content">
+                @((MarkupString)_article.Content)
+            </div>
+        </div>
+        <ScrollToTop />
+    </div>
+}

@@ -1,0 +1,128 @@
+﻿@page "/"
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.MainComponents.Dashboard
+@using Rise.Shared.News
+@using Rise.Shared.Shortcuts
+@using Rise.Shared.Notifications
+@using Rise.Client.Pages.Shortcuts.Components
+@using Rise.Client.Resources.MainComponents.Dashboard
+
+@inject INewsService NewsService
+@inject IStringLocalizer<Dashboard> Loc
+@inject NavigationManager Nav
+
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+<PageTitle>Home</PageTitle>
+@if (_isLoading)
+{
+    <Loader/>
+}
+else
+{
+<div class="mx-lg-10 pt-lg-10">
+    <MudGrid Class="mx-auto" Spacing="0">
+        <!-- QUICKLINKS SECTION -->
+        <MudItem xs="12" Class="mx-lg-10">
+            @if (_alert is not null)
+            {
+                <div class="dashboard-alert">
+                    <AlertSection
+                        Title="@_alert.Value.Title"
+                        Message="@_alert.Value.Message"
+                        Severity="@_alert.Value.Severity"
+                        Link="@_alert.Value.Link"
+                        ShowCloseButton="true"/>
+                </div>
+            }
+            <div class="quicklinks-section mt-0 mb-0">
+                <div class="quicklinks-header">
+                    <h3>@Loc["MyShortcuts"]</h3>
+                    <div class="quicklinks-buttons">
+                        <button class="quicklinks-edit-button" @onclick="() => Nav.NavigateTo(GetQuicklinksUrl())">
+                            <MudIcon Icon="@Icons.Material.Rounded.Edit" Size="Size.Small" Title="Edit"/>
+                        </button>
+                    </div>
+                </div>
+                <div class="quicklinks-grid">
+                    @if (_quicklinks.Any())
+                    {
+                        @foreach (var (link, index) in _quicklinks.Select((value, i) => (value, i)))
+                        {
+                            <QuicklinkItem Title="@link.Title"
+                                           Icon="@link.Icon"
+                                           Label="@link.Label"
+                                           LinkUrl="@link.LinkUrl"
+                                           Colour="@link.Colour"/>
+                        }
+                    }
+                    else
+                    {
+                        <p>@Loc["NoShortcutsFound"]</p>
+                    }
+                </div>
+            </div>
+        </MudItem>
+
+        <!-- CLASS SCHEDULE -->
+        @if (_isAuthenticated)
+        {
+            <MudItem xs="12" lg="12" Class="mx-lg-10">
+                <div class="class-schedule-section">
+                    <h3>@Loc["NextLesson"]</h3>
+
+                    @if (_lesson != null)
+                    {
+                        <ClassScheduleBlock Id="@_lesson.Id"
+                                            Name="@_lesson.Name"
+                                            Start="@_lesson.Start"
+                                            End="@_lesson.End"
+                                            Room="@(_lesson.ClassroomDtos.Any() ? _lesson.ClassroomDtos.First().Description : "N/A")"
+                                            LessonType="@_lesson.LessonType" />
+                    }
+                    else
+                    {
+                        <p>@Loc["NoNextLessonFound"]</p>
+                    }
+                </div>
+            </MudItem>
+            
+            <!-- ABSENCES -->
+            <MudItem xs="12" lg="12" Class="mx-lg-10">
+                @if (_absence is { Count: > 0 })
+                {
+                    <div class="abscence-margin">
+                        <AbscenceAlert Abscences="_absence"/>
+                    </div>
+                }
+            </MudItem>
+        }
+        else
+        {
+            <MudItem xs="12" lg="12">
+                <div class="centered-login-block">
+                    <i class="fa-regular fa-lightbulb"></i>
+                    <p>@((MarkupString)Loc["InfoGuest"].Value)</p>
+                    <CommonLinkButton Href="/login" Icon="@Icons.Material.Filled.Login"
+                                      Text="@Loc["Login"].Value"></CommonLinkButton>
+                </div>
+            </MudItem>
+        }
+
+        <!-- NEWS CAROUSSEL -->
+        <MudItem xs="12" lg="12">
+            <div Class="carousel-space mx-lg-10">
+                <NewsCarousel News="_carouselNews" ShowIndicators="false"/>
+            </div>
+        </MudItem>
+    </MudGrid>
+</div>
+}
+
+@code {
+    private List<NewsDto.Index> _carouselNews = [];
+    private IEnumerable<ShortcutDto.Index> _quicklinks = [];
+}

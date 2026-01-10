@@ -1,0 +1,43 @@
+.deadline-card {
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.3s ease-in-out, opacity 0.5s ease-out; 
+}
+
+.deadline-card.expanded {
+    border-color: var(--secondary-color);
+}
+
+.deadline-card.completing {
+    opacity: 0;
+}
+
+.event-content {
+    display: flex;
+    align-items: stretch;
+    cursor: pointer;
+}
+
+.deadline-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px 10px 20px;
+    width: 100%;
+}
+
+.deadline-info p {
+    color: #BDBDC1;
+    margin-bottom: 0;
+}
+
+.deadline-info h3 {
+    margin-bottom: 0;
+}
+
+.deadline-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

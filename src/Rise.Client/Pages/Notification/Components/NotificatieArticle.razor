@@ -1,0 +1,41 @@
+﻿@namespace Rise.Client.Pages.Notification.Components
+@using Rise.Client.Resources.Pages.Notifications
+@using Microsoft.Extensions.Localization
+@inject NavigationManager NavigationManager
+@inject IStringLocalizer<Notifications> Loc
+
+<div class="swipe-container @( _isCollapsing ? "removing" : "" )"
+     @onpointerdown="OnPointerDown"
+     @onpointermove="OnPointerMove"
+     @onpointerup="OnPointerUp"
+     @onpointercancel="OnPointerCancel">
+    <div class="swipe-background" style="opacity:@((_translateX < 0 && !_isRemoving) ? 1 : 0); pointer-events:@((_isRemoving) ? "none" : "auto")">
+        <div class="delete-area" style="@DeleteAreaStyle">
+            <MudIcon Icon="@Icons.Material.Filled.Delete" />
+        </div>
+    </div>
+
+    @if (Notification is not null)
+    {
+        <div class="notificatie-card swipe-card @(Notification.IsRead ? "" : "unread")"
+             style="@CardStyle"
+             @onclick="OnClick">
+            <MudIcon Icon="@(Notification.IsRead? Icons.Material.Outlined.MarkEmailRead : Icons.Material.Rounded.Mail)"
+                     Title="@(Notification.IsRead? Loc["Read"] : Loc["Unread"])" />
+
+            <div class="content">
+                
+                <div class="content-header">
+                    <div class="title">@Notification.Title</div>
+                </div>
+                
+                <div class="meta">
+                    <span class="date">@Notification.CreatedAt.ToString("dd-MM-yyyy")</span>
+                    <span class="time">@Notification.CreatedAt.ToString("HH:mm")</span>
+                </div>
+            </div>
+
+            <MudIcon Icon="@Icons.Material.Rounded.KeyboardArrowRight" Title="Notificatie" />
+        </div>
+    }
+</div>

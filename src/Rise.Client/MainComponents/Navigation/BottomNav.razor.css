@@ -1,0 +1,84 @@
+::deep .bottom-nav-item .mud-icon-root {
+    margin-bottom: 2px;
+    margin-top: 8px;
+}
+
+::deep .bottom-nav-item .mud-nav-link.mud-ripple {
+    padding: 8px 0;
+}
+
+::deep .bottom-nav-item .mud-nav-link-text {
+    margin-left: 0;
+    padding-left: 0;
+    text-align: center;
+}
+
+::deep .bottom-nav-paper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    border-top: 2px solid #fff;
+    color: white;
+    border-radius: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+::deep .bottom-nav-grid {
+    margin: 0;
+    padding: 0;
+}
+
+::deep .bottom-nav-item {
+    padding: 0;
+    margin: 0;
+}
+
+::deep .bottom-nav-item {
+    padding: 4px 0 !important;
+    margin: 0 !important;
+    min-height: unset !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+::deep .bottom-nav-item .mud-icon-root {
+    margin-bottom: 2px;
+    margin-top: 8px;
+}
+
+::deep .bottom-nav-item div {
+    font-size: 10px; 
+    text-align: center;
+}
+
+::deep .bottom-nav-item .mud-nav-link.mud-ripple {
+    padding: 8px 0;
+}
+
+::deep .bottom-nav-item .mud-nav-link-text {
+    margin-left: 0;
+    padding-left: 0;
+    text-align: center;
+}
+
+::deep .bottom-nav-paper {
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    background-color: #000; 
+    border-top: 2px solid #fff; 
+    color: white; 
+    border-radius: 0; 
+    z-index: 1000;
+}
+
+::deep .bottom-nav-grid {
+    margin: 0;
+    padding: 0;
+}

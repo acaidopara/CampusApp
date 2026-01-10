@@ -1,0 +1,24 @@
+@page "/instellingen"
+@using Rise.Client.Pages.Settings.Components
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.Resources.Pages.Settings
+
+@inject IStringLocalizer<Settings> Loc
+@attribute [Authorize]
+
+<PageTitle>@Loc["Settings"]</PageTitle>
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div class="mx-8 mx-lg-10 mb-10 mt-5">
+    <MudGrid Class="mx-auto" Spacing="0">
+        <MudItem xs="12" Class="mx-lg-10">
+            <TopPage BackLinkUrl="" Title="@Loc["Settings"].Value"/>
+            <CampusPreferenceSelector/>
+            <SettingsSwitches/>
+            <ColourSelector/>
+        </MudItem>
+    </MudGrid>
+</div>
+    

@@ -1,0 +1,64 @@
+
+.campus-select{
+    background-color: #EEEEEE;
+}
+.diet-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.8rem;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.diet-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+@media(min-width: 1024px) {
+.diet-info .diet-item:last-child {
+    margin-left: 5em;
+}
+}
+
+.diet-item p {
+    margin-left: 5px;
+    font-size: 0.8rem;
+    color: #333;
+}
+
+.weekmenu-resto {
+    background-color: black;
+    color: white;
+    padding: 20px;
+}
+.vegan-checkbox input[type="checkbox"] {
+    accent-color: #4CAF50; 
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.weekmenu .mud-tabs {
+    padding-top: 0;
+}
+
+.menu-group-wrapper .menu-container:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.menu-group-wrapper .menu-container:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+@media(max-width: 600px) {
+    .full-width {
+        flex: 1 1 100%;
+        margin-top: 0.5rem;
+    }
+}
+
+.filter-option{
+    cursor: pointer; 
+    display: flex;
+    align-items: center;
+}

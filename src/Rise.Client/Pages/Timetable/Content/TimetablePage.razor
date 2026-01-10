@@ -1,0 +1,57 @@
+@page "/lessenrooster"
+@page "/lessenrooster/{Id:int}"
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Shared.Lessons
+@using Rise.Client.Pages.Timetable.Components
+@using Rise.Client.Resources.Pages.Timetable
+@using Rise.Shared.Deadlines
+@inject ILessonService LessonService
+@inject IDeadlineService DeadlineService
+@attribute [Authorize(Roles = "Student")]
+@inject IStringLocalizer<Timetable> Loc
+@inject NavigationManager Nav
+
+<PageTitle>@Loc["Title"]</PageTitle>
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+@if (_isLoading)
+{
+    <Loader/>
+}
+else
+{
+    <div class="mx-8 mx-lg-10">
+        <MudGrid Class="mx-auto" Spacing="0">
+            <MudItem xs="12" Class="mx-lg-10">
+                <TopPage Title="@Loc["MyTimetable"].Value" />
+                <div class="lessenrooster-title">
+                    <WeekSelector OnWeekChanged="HandleWeekChanged" ForceWeekStart="_geselecteerdeWeekStart"/>
+                    <CommonActionButton Text=@Loc["Today"].Value OnClick="@GaNaarVandaag"/>
+                </div>
+
+                @* MOBILE *@
+                <MudHidden Breakpoint="Breakpoint.LgAndUp">
+                    <TimetableMobile
+                        Lessons="@_gefilterdeLessen"
+                        Deadlines="@_gefilterdeDeadlines"
+                        SelectedDay="@_dagVandaag"
+                        WeekStart="@_geselecteerdeWeekStart"
+                        OpenLessonId="@Id"/>
+                </MudHidden>
+
+                @* DESKTOP *@
+                <MudHidden Breakpoint="Breakpoint.MdAndDown">
+                    <TimetableDesktop
+                        Lessons="@_gefilterdeLessen"
+                        Deadlines="@_gefilterdeDeadlines"
+                        SelectedDay="@_dagVandaag"
+                        WeekStart="@_geselecteerdeWeekStart"
+                        OpenLessonId="@Id"/>
+                </MudHidden>
+            </MudItem>
+        </MudGrid>
+    </div>
+}

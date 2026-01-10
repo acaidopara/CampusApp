@@ -1,0 +1,92 @@
+@page "/studenten-deals/{DealId:int}"
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.Pages.Campus.Components
+@using Rise.Client.Pages.CampusLife.Components
+@using Rise.Client.Resources.Pages.CampusLife
+
+@inject ISnackbar Snackbar
+@inject IJSRuntime Js
+@inject IStringLocalizer<CampusLife> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div>
+    @if (_deal is null)
+    {
+        <Loader ShowBackButton="true" Text="@Loc["DealLoading"]" />
+    }
+    else
+    {
+        <div class="event-article-page">
+            <div>
+                <DealItemHeader Item="_deal" Page="studenten-deals" />
+            </div>
+            <div class="info-section">
+                <div class="article-sidebar">
+                    <InfoCard
+                        Date="@($"Geldig tot: {_deal.DueDate.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("nl-NL"))}")"
+                        Money="@($"{_deal.Discount}% korting")" Location="@_deal.Store" />
+                    <MudHidden Breakpoint="Breakpoint.MdAndDown">
+                        <div class="mt-10 buttonset">
+                            @if (!string.IsNullOrWhiteSpace(_deal.WebUrl))
+                            {
+                                <div class="mb-3">
+                                    <CommonLinkButton Text="@Loc["website"].Value" Href="@_deal.WebUrl" />
+                                </div>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(_deal.DiscountCode))
+                            {
+                                <div class="mb-7 secondButton">
+                                    <CommonActionButton Text="@Loc["Discount"].Value"
+                                        OnClick="() => CopyDiscountCodeToClipboard(_deal.DiscountCode)" />
+                                </div>
+                            }
+                        </div>
+                    </MudHidden>
+                </div>
+                <div class="article-content">
+                    <AboutSection Title="@Loc["Description"].Value" Description="@_deal.Description"
+                        ReadMoreText="@Loc["ReadMore"].Value" ReadLessText="@Loc["ReadLess"].Value" MaxLength="100" />
+
+                    <MudHidden Breakpoint="Breakpoint.LgAndUp">
+                        <div class="mt-10 buttonset">
+                            @if (!string.IsNullOrWhiteSpace(_deal.WebUrl))
+                            {
+                                <div class="mb-3">
+                                    <CommonLinkButton Text="@Loc["website"].Value" Href="@_deal.WebUrl" />
+                                </div>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(_deal.DiscountCode))
+                            {
+                                <div class="mb-7 secondButton">
+                                    <CommonActionButton Text="@Loc["Discount"].Value"
+                                        OnClick="() => CopyDiscountCodeToClipboard(_deal.DiscountCode)" />
+                                </div>
+                            }
+                        </div>
+                    </MudHidden>
+                </div>
+                <ScrollToTop />
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private async Task CopyDiscountCodeToClipboard(string code)
+    {
+        if (!string.IsNullOrWhiteSpace(code))
+        {
+            await Js.InvokeVoidAsync("navigator.clipboard.writeText", code);
+
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+            Snackbar.Add(Loc["CodeCopied"].Value, Severity.Success, config =>
+            {
+                config.VisibleStateDuration = 1500;
+                config.ShowCloseIcon = false;
+            });
+        }
+    }
+}

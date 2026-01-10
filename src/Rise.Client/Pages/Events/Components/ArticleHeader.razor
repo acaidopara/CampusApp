@@ -1,0 +1,31 @@
+@using Rise.Client.Pages.News.Components
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Events
+@using Rise.Shared.News
+
+@inject IConfiguration Config
+@inject NavigationManager NavigationManager
+@inject IJSRuntime Js
+@inject ISnackbar Snackbar
+@inject IStringLocalizer<Events> Loc
+
+<div class="article-header" style="background-image: url(@($"{Config["ImageBasePath"]}/{Article?.ImageUrl}"))">
+    <div class="image-overlay"></div>
+    <div class="header-content">
+        <MudIconButton Icon="@Icons.Material.Filled.ArrowRightAlt"
+                       OnClick="@(() => NavigationManager.NavigateTo("/nieuws-en-events?tab=1"))"
+                       title="@Loc["BackToNewsAndEvents"]" />
+
+        <h2>@Article?.Title</h2>
+        
+        <TopicLabel 
+            Label="@Article?.Subject" 
+            Icon="@(Topics.AllTopics.FirstOrDefault(t => t.Name == Article?.Subject)?.Icon)" />
+        
+        <div class="share-icon">
+            <MudIconButton Icon="@Icons.Material.Filled.Link"
+                           OnClick="CopyLink"
+                           title="@Loc["CopyLink"]"/>
+        </div>
+    </div>
+</div>

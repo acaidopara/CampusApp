@@ -1,0 +1,36 @@
+.class-schedule-block {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+.class-schedule-info {
+    padding: 10px 0 10px 20px;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.class-schedule-info h2 {
+    margin: 15px 0 20px;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+}
+
+.class-schedule-info p:first-of-type {
+    color: #BDBDC1;
+    font-size: 0.8rem;
+}
+
+.class-schedule-info p:last-of-type {
+    font-size: 0.8rem;
+}
+
+.class-schedule-info div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+    column-gap: 10px;
+}

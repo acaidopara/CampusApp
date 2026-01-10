@@ -1,0 +1,9 @@
+@using System.Globalization
+@using Blazor.WebAssembly.DynamicCulture
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div class="class-schedule-day">
+    <p>@DisplayDate.ToString(MonthFormat, CultureInfo.CurrentCulture)</p>
+    <p>@DisplayDate.Day</p>
+</div>

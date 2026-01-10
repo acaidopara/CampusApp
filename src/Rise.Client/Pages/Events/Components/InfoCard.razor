@@ -1,0 +1,44 @@
+﻿@using Rise.Shared.Events
+@using System.Globalization
+
+<div class="infocard">
+    <div class="infocard-row">
+        <i class="fa-regular fa-calendar"></i>
+        <p>@Event?.Date.Date.ToString("dd MMM yyyy", CultureInfo.CurrentCulture)</p>
+    </div>
+    <div class="infocard-row">
+        <i class="fa-regular fa-clock"></i>
+        <p>
+            @Event?.Date.StartTime.ToString("HH:mm")
+            @if (Event?.Date.EndTime != null)
+            {
+                <text> - @Event.Date.EndTime?.ToString("HH:mm")</text>
+            }
+        </p>
+    </div>
+    <div class="infocard-row">
+        <div class="icon-circle">
+            <i class="fa-regular fa-compass"></i>
+        </div>
+        <p>
+            @{
+                var a = Event?.Address;
+                var fullAddress = string.Join(", ", new[] { a?.AddressLine1, a?.AddressLine2 }
+                                      .Where(s => !string.IsNullOrWhiteSpace(s)))
+                                  + $", {a?.PostalCode} {a?.City}";
+            }
+            @fullAddress
+        </p>
+    </div>
+    @if (Event?.Price is not null)
+    {
+        <div class="infocard-row">
+            <i class="fa-regular fa-money-bill-1"></i>
+            <p>€ @Event?.Price.Value.ToString("N2", CultureInfo.CurrentCulture)</p>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public EventDto.DetailExtended? Event { get; set; }
+}

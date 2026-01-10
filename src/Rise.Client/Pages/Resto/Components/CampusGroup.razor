@@ -1,0 +1,31 @@
+@inject IStringLocalizer<Rise.Client.Resources.Pages.Resto.Resto> Loc
+@using Microsoft.Extensions.Localization
+@using Rise.Shared.Resto
+<div
+    class="campus-group @(IsExpanded ? "expanded" : "") @(IsCompleting ? "completing" : "") @(IsLoading ? "loading" : "")">
+    <div class="resto-head" @onclick="ToggleExpand">
+        <p>@Value.Name</p>
+        <span class="icon mr-1"><i class="fa-solid fa-chevron-down"></i></span>
+    </div>
+    <div class="menu-group" style="padding:0;">
+        @if (Value.Menu.HasMenu)
+        {
+            <MudTabs dense="true" Rounded="false" Style="min-height:0;" Class="p-0 m-0">
+                @foreach (var pair in Value.Menu.Items)
+                {
+                    <MudTabPanel Text="@pair.Key">
+                        <div style="overflow-y:auto;">
+                            <MenuGroupWrapper GroupName="@TranslateFoodType(pair.Value.First().FoodCategory)" Entries="@pair.Value.Where(m=>(ShowVegan?m.IsVeganAndHalal == true: true) && (ShowVeggie?m.IsVeggieAndHalal == true: true))" />
+                        </div>
+                    </MudTabPanel>
+                }
+            </MudTabs>
+        }
+        else
+        {
+            <p class="Menu-description">@Value.Menu.DescriptionMenu</p>
+        }
+
+    </div>
+
+</div>

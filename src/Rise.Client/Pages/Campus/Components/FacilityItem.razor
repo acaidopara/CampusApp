@@ -1,0 +1,11 @@
+<div class="facilities-item">
+    <div class="quicklink-icon">
+        <span><MudIcon Icon="@Icon" Title="@Title" Size="Size.Large" /></span>
+    </div>
+    <p>@Title</p>
+</div>
+
+@code {
+    [Parameter] public required string Title { get; set; }
+    [Parameter] public required string Icon { get; set; }
+}

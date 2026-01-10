@@ -1,0 +1,23 @@
+.select select:focus {
+    border-color: black !important;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+    border-color: black !important;
+}
+
+.select {
+    width: 100%;
+}
+
+.select select {
+    background-color: white;
+    color: black;
+    border-color: lightgray;
+    box-shadow: none;
+    width: 100%;
+}
+
+.select:focus-within::after {
+    transform: rotate(135deg);
+}

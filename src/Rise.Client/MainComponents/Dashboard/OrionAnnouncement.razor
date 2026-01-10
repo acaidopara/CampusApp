@@ -1,0 +1,17 @@
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.Resources.MainComponents.Dashboard
+
+@inject IStringLocalizer<Dashboard> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div class="announcement-block">
+    <p>@Announcement.Cursus</p>
+    <h3>@Announcement.Title</h3>
+    <p>@Announcement.Description</p>
+    <a href="@Announcement.LinkUrl">
+        @Loc["ReadMore"]
+        <MudIcon Icon="@Icons.Material.Outlined.ArrowRightAlt" Title="@Loc["Arrow"].Value"/>
+    </a>
+</div>

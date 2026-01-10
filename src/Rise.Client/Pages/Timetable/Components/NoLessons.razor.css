@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.no-lessons {
+    margin: 40px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.no-lessons p {
+    color: #000000;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.no-lessons strong {
+    color: #000000
+}
+
+.no-lessons a {
+    color: white;
+}

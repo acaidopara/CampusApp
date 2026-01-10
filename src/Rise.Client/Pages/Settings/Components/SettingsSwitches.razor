@@ -1,0 +1,120 @@
+@using System.Security.Claims
+@using Rise.Client.MainComponents.Common
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Settings
+@using Rise.Shared.Student
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject ISnackbar Snackbar
+@inject IStudentService StudentService
+@using Blazor.WebAssembly.DynamicCulture
+
+@inject IStringLocalizer<Settings> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div class="settings-switches">
+    <h3>@Loc["PushNotifications"]</h3>
+    <CommonSwitch Label="@Loc["LessonChanges"].Value"
+                  Checked="_lessonChangesEnabled"
+                  CheckedChanged="async (val) => { _lessonChangesEnabled = val; await OnPreferenceChanged(); }" />
+
+    <CommonSwitch Label="@Loc["AbsentLecturer"].Value"
+                  Checked="_absenteesEnabled"
+                  CheckedChanged="async (val) => { _absenteesEnabled = val; await OnPreferenceChanged(); }" />
+
+    <CommonSwitch Label="@Loc["NewsAndEvents"].Value"
+                  Checked="_newsAndEventsEnabled"
+                  CheckedChanged="async (val) => { _newsAndEventsEnabled = val; await OnPreferenceChanged(); }" />
+
+    <CommonSwitch Label="@Loc["Deadlines"].Value"
+                  Checked="_deadlinesEnabled"
+                  CheckedChanged="async (val) => { _deadlinesEnabled = val; await OnPreferenceChanged(); }" />
+</div>
+
+@code {
+    private bool _lessonChangesEnabled;
+    private bool _absenteesEnabled;
+    private bool _newsAndEventsEnabled;
+    private bool _deadlinesEnabled;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCurrentPreferences();
+    }
+    
+    private async Task LoadCurrentPreferences()
+    {
+        try
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+
+            if (user.Identity?.IsAuthenticated == true)
+            {
+                _lessonChangesEnabled   = ParseBool(user, "LessonChanges");
+                _absenteesEnabled       = ParseBool(user, "Absentees");
+                _newsAndEventsEnabled   = ParseBool(user, "NewsAndEvents");
+                _deadlinesEnabled       = ParseBool(user, "Deadlines");
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error loading push notification preferences: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private static bool ParseBool(ClaimsPrincipal user, string claimName)
+    {
+        var value = user.FindFirst(claimName)?.Value;
+        return bool.TryParse(value, out var parsed) && parsed;
+    }
+    
+    private async Task OnPreferenceChanged()
+    {
+        try
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+
+            if (user.Identity?.IsAuthenticated == true)
+            {
+                var userIdClaim = user.FindFirst("Id");
+                if (userIdClaim == null)
+                    return;
+
+                var userId = int.Parse(userIdClaim.Value);
+
+                var preferenceRequest = new StudentRequest.Preference
+                {
+                    UserId = userId,
+                    LessonChangesEnabled = _lessonChangesEnabled,
+                    AbsenteesEnabled = _absenteesEnabled,
+                    NewsAndEventsEnabled = _newsAndEventsEnabled,
+                    DeadlinesEnabled = _deadlinesEnabled
+                };
+
+                var response = await StudentService.UpdatePushNotifPreferences(preferenceRequest);
+
+                if (response.IsSuccess)
+                {
+                    Snackbar.Add(Loc["PushNotifPreferenceUpdated"].Value, Severity.Success);
+
+                    if (AuthenticationStateProvider is IHostEnvironmentAuthenticationStateProvider hostProvider)
+                    {
+                        hostProvider.SetAuthenticationState(
+                            Task.FromResult(await AuthenticationStateProvider.GetAuthenticationStateAsync())
+                        );
+                    }
+                }
+                else
+                {
+                    Snackbar.Add(Loc["PushNotifPreferenceUpdateFailed"].Value, Severity.Error);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error updating push notification preference: {ex.Message}", Severity.Error);
+        }
+    }
+}

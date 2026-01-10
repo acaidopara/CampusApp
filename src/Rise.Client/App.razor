@@ -1,0 +1,25 @@
+﻿@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.Api
+@inject IStringLocalizer<Resources.MainComponents.Common.ErrorDisplay> Loc
+<CascadingAuthenticationState>
+    <LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+    <Router AppAssembly="typeof(App).Assembly">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)">
+                <NotAuthorized>
+                    <ErrorDisplay Title=@Loc["UnauthorizedTitle"].Value ErrorCode="401"
+                                  Message=@Loc["UnauthorizedMessage"].Value/>
+                </NotAuthorized>
+            </AuthorizeRouteView>
+            <FocusOnNavigate RouteData="routeData" Selector="h1"/>
+            <NetworkInitializer />
+        </Found>
+        <NotFound>
+            <LayoutView Layout="typeof(MainLayout)">
+                <ErrorDisplay Title=@Loc["NotFoundTitle"].Value ErrorCode="404" Message=@Loc["NotFoundMessage"].Value/>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

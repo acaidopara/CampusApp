@@ -1,0 +1,13 @@
+<div>
+    <div class="mb-2 mt-3">
+        <FilterChipSet Items="@Items"
+                       SelectedItem="@SelectedItem"
+                       SelectedItemChanged="@SelectedItemChanged"
+                       UnreadCount="UnreadCount"/>
+    </div>
+    <div class="mb-2 mt-3">
+        <SearchBar SearchTerm="@_searchTerm"
+                   SearchTermChanged="@OnSearchChangedInternal"
+                   PlaceHolderText="@Placeholder"/>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+@page "/studentenverenigingen"
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.MainComponents.Dashboard
+@using Rise.Client.MainComponents.Filtering
+@using Rise.Client.Pages.CampusLife.Components
+@using Rise.Client.Resources.Pages.CampusLife
+
+@inject IStringLocalizer<CampusLife> Loc
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+@if (_isLoading)
+{
+    <Loader></Loader>
+}
+else
+{
+    
+    <div>
+        <LetterHeader ImageName="banner-studentenverenigingen.jpg" Title="Studentenverenigingen" BackLinkUrl="" />
+
+        <div class="page px-lg-13">
+            <SearchBar SearchTerm="@_searchTerm"
+                       SearchTermChanged="@OnSearchTermChanged"
+                       PlaceHolderText="@Loc["SearchClub"].Value"/>
+        
+            @if (!_clubItems.Any())
+            {
+                <div class="mt-10">
+                    <AlertSection 
+                        Title="@Loc["Oops"].Value" 
+                        Message="@Loc["NoClubsFound"].Value" 
+                        Severity="Severity.Info"/>
+                </div>
+            }
+            else
+            {
+                <div class="mt-12 mb-12">
+                    @foreach (var item in _clubItems)
+                    {
+                        <StudentClubCard Club="item" />
+                    }
+                </div>
+            
+                <div class="d-flex justify-center mt-4">
+                    <MudPagination 
+                        Color="Color.Primary" 
+                        Count="@_pageCount"
+                        Selected="@SelectedPage"
+                        SelectedChanged="@OnPageChanged"
+                        BoundaryCount="1"
+                        MiddleCount="1"
+                        Variant="Variant.Text"/>
+                </div>
+            }
+        </div>
+    </div>
+}

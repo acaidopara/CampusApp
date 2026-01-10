@@ -1,0 +1,71 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Campus
+@using Rise.Shared.Infrastructure
+@inject IStringLocalizer<Campus> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+
+@if (SearchResults != null)
+{
+    @if (SearchResults?.Campuses.Campuses.Any() == true)
+    {
+        <h3>@Loc["Campusses"]</h3>
+        <ul>
+            @foreach (var campus in SearchResults.Campuses.Campuses)
+            {
+                <li>
+                    <a href="/campus/@campus.Id">@campus.Name</a>
+                </li>
+            }
+        </ul>
+    }
+
+    @if (SearchResults?.Buildings.Buildings.Any() == true)
+    {
+        <h3>@Loc["Buildings"]</h3>
+        <ul>
+            @foreach (var building in SearchResults.Buildings.Buildings)
+            {
+                <li>
+                    <a href="/campus/@building.CampusId/building/@building.Id/detail">
+                        @building.Name - @building.Address.AddressLine1 @building.Address.AddressLine2, @building.Address.PostalCode @building.Address.City (@building.Campus)
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+
+    @if (SearchResults?.Classrooms.Classrooms.Any() == true)
+    {
+        <h3>@Loc["Classrooms"]</h3>
+        <ul>
+            @foreach (var classroom in SearchResults.Classrooms.Classrooms)
+            {
+                <li>
+                    <a href="/campus/@classroom.Building.CampusId/building/@classroom.Building.Id/classroom/@classroom.Id">
+                        @classroom.Description
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+
+    @if (SearchResults != null &&
+         !SearchResults.Campuses.Campuses.Any() &&
+         !SearchResults.Buildings.Buildings.Any() &&
+         !SearchResults.Classrooms.Classrooms.Any())
+    {
+        <p>@Loc["NoResults"]</p>
+    }
+}
+else
+{
+    <p>@Loc["NoResults"]</p>
+}
+
+@code {
+    [Parameter] public string? SearchTerm { get; set; }
+    [Parameter] public InfrastructureResponse.Index? SearchResults { get; set; }
+}

@@ -1,0 +1,43 @@
+::deep .select-container {
+    width: 100%;
+}
+
+::deep .selectfield {
+    background-color: #f5f5f5;
+    border-radius: 30px;
+    box-shadow: none;
+}
+
+::deep .mud-input-underline::before,
+::deep .mud-input-underline::after {
+    display: none !important;
+}
+
+::deep .mud-input {
+    margin-top: 0 !important;
+}
+
+::deep .mud-input-label {
+    top: 6px !important;
+    left: 20px;
+    transform: none !important;
+}
+
+::deep .mud-input-adornment-icon {
+    margin-right: 10px;
+}
+
+::deep .mud-select-input {
+    margin-left: 10px !important;
+}
+
+/* 
+================================
+RESTO OVERRIDE CSS
+css hier toegevoegd omdat override.css niks doet
+================================
+*/
+::deep .campus-select{
+    background-color: #EEEEEE !important;
+    z-index: 999;
+}

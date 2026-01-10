@@ -1,0 +1,78 @@
+@page "/campus"
+@page "/campus/{CampusId:int}/building/{BuildingId:int}/classroom/{ClassroomId:int}"
+@page "/campus/{CampusId:int}/building/{BuildingId:int}"
+
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.MainComponents.Filtering
+@using Rise.Client.Pages.Campus.Components
+@using Rise.Shared.Infrastructure
+@using Rise.Client.Resources.Pages.Campus
+
+@inject IInfrastructureService InfrastructureService
+@inject AuthenticationStateProvider AuthProvider;
+@inject IStringLocalizer<Campus> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+<PageTitle>Campus</PageTitle>
+
+@if (_isLoading)
+{
+    <Loader/>
+}
+<div class="campus-container">
+    <div class="map-container">
+        @if (_campus != null)
+        {
+            @if (_campus.Name == "Campus Schoonmeersen")
+            {
+                <SchoonmeersenMap Campus="_campus" SelectedClassroom="_selectedClassroom" SelectedBuilding2="_selectedBuilding"/>
+            }
+            else
+            {
+                <div class="no-campus-map">
+                    <p>Plattegrond van @_campus.Name is momenteel niet beschikbaar.</p>
+                </div>
+            }
+        }
+    </div>
+    <div class="search-wrapper @(IsSearchActive ? "active" : "")">
+        @if (IsSearchActive)
+        {
+            <MudIconButton Class="back-button" Icon="@Icons.Material.Filled.ArrowBack" Color="Color.Dark"
+                           OnClick="CloseSearch"/>
+        }
+        @if (!_isSelectingCampus)
+        {
+            <div class="search-bar">
+                <SearchBar SearchTerm="@_searchTerm" SearchTermChanged="OnSearchValueChanged"
+                           PlaceHolderText=@Loc["SearchPlaceholder"].Value/>
+            </div>
+        }
+    </div>
+    <div class="search-results @(IsSearchActive ? "active" : "")">
+        <SearchResultOverview SearchTerm="@_searchTerm" SearchResults="_searchResults"/>
+    </div>
+    @if (!IsSearchActive)
+    {
+        <div class="bottom-buttons">
+            @if (_campus != null)
+            {
+                <a href="/campus/@_campus.Id">
+                    <MudIcon Icon="@Icons.Material.Filled.Info" Size="Size.Medium"/>
+                </a>
+            }
+            <a @onclick="SelectCampus" style="cursor:pointer; text-decoration:none;">
+                <MudIcon Icon="@Icons.Material.Filled.LocationCity" Size="Size.Medium"/>
+            </a>
+        </div>
+    }
+    @if (_isSelectingCampus)
+    {
+        <CampusesOverview Campuses="_campuses" CloseCampusSelection="@CloseCampusSelection"
+                          SelectSpecificCampus="@SelectSpecificCampus"/>
+    }
+
+</div>

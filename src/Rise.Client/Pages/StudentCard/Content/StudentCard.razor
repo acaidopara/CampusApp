@@ -1,0 +1,73 @@
+@page "/studentenkaart"
+@using System.Globalization
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@attribute [Authorize(Roles = "Student")]
+@inject IConfiguration Config
+
+@inject IStringLocalizer<Resources.Pages.Studentcard.StudentCard> Localizer
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+<PageTitle>@Localizer["PageTitle"]</PageTitle>
+
+@if (_isLoading)
+{
+    <Loader></Loader>
+}
+else
+{
+    <div class="studentenkaart-pagina-bg">
+        <AuthorizeView>
+            <div class="back-arrow-section">
+                <a href="" class="back-link">
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowRightAlt" Title="Back"/>
+                </a>
+            </div>
+            <div class="studentenkaart-pagina">
+                <div class="studentenkaart-hogent">
+                    <div class="top">
+                        <img src="@($"{Config["ImageBasePath"]}/HOGENT_Logo_Zwart.png")" alt="@Localizer["HogentLogoAlt"]"/>
+                        <p>@($"{context.User.FindFirst("Firstname")?.Value}\u0020{context.User.FindFirst("Lastname")?.Value}")</p>
+                    </div>
+                    <div class="rest">
+                        <div>
+                            <img class="profielfoto"
+                                 src="@($"{Config["ImageBasePath"]}/Profielfoto_Studentenkaart.png")"
+                                 alt="@Localizer["ProfilePhotoAlt"]"/>
+
+                        </div>
+                        <div class="rechts">
+                            <div class="gegevens">
+                                <p>@context.User.FindFirst("Birthdate")?.Value</p>
+                                <p>@context.User.FindFirst("Studentnumber")?.Value</p>
+                                <p>
+                                    @($"{((context.User.FindFirst("Studentnumber")?.Value)?[3..] ?? "")}" +
+                                    $"{(context.User.FindFirst("Firstname")?.Value.FirstOrDefault().ToString().ToLower() ?? "")}" +
+                                    $"{(context.User.FindFirst("Lastname")?.Value.FirstOrDefault().ToString().ToLower() ?? "")}")
+                                </p>
+                            </div>
+                            <div class="vervaldatum">
+                                <p>@Localizer["ExpiryLabel"]</p>
+                                <p>@context.User.FindFirst("Creationdate")?.Value</p>
+                            </div>
+                            <div class="barcode">
+                                <img src="@($"{Config["ImageBasePath"]}/Barcode_Studentenkaart.png")"
+                                     alt="@Localizer["BarcodeAlt"]"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="datum-en-tijd">
+                    <p>@_huidigeDatum.ToString("dddd dd MMMM yyyy", CultureInfo.CurrentCulture)</p>
+                    <p>@_huidigeDatum.ToString("HH:mm")</p>
+                </div>
+
+                <div class="studentenkaart-europees">
+                    <img src="@($"{Config["ImageBasePath"]}/QR_code_Studentenkaart.png")" alt="Europese studentenkaart"/>
+                </div>
+            </div>
+        </AuthorizeView>
+</div>
+}

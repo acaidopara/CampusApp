@@ -1,0 +1,118 @@
+.notificatie-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 12px;
+  margin: 5px 0;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.icon {
+  font-size: 24px;
+  width: 40px;
+  text-align: center;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+.content-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 12px;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.meta .date {
+  margin-right: 8px;
+}
+
+.mark-btn {
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.swipe-container {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.swipe-container {
+  max-height: 240px;
+  overflow: hidden;
+  transition: max-height 220ms ease, opacity 200ms ease, margin 200ms ease, padding 200ms ease;
+}
+
+.swipe-container.removing {
+  max-height: 0 !important;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.swipe-background {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  transition: background-color 120ms linear, opacity 160ms ease;
+  z-index: 0;
+  background: transparent;
+}
+
+.swipe-background .delete-area {
+  background: #c62828;
+  color: white;
+  height: 56px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+.swipe-card {
+  position: relative;
+  z-index: 1;
+  will-change: transform;
+  cursor: grab;
+  transition: transform 220ms ease;
+}
+
+.swipe-card:active {
+  cursor: grabbing;
+}
+
+.swipe-background[style*="pointer-events: none"] {
+  pointer-events: none;
+}

@@ -1,0 +1,52 @@
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Timetable
+@using Rise.Shared.Lessons
+@inject IStringLocalizer<Timetable> Loc
+
+<div class="course-details">
+    <div class="header">
+        <h2>@Course.Name</h2>
+        <button class="btn-close" @onclick="OnClose">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+    <div class="space">
+        <p>
+            <span class="circle"><i class="fas fa-chalkboard-teacher"></i></span>
+            <span>
+                @foreach (var teacher in Course.TeacherNames)
+                {
+                    @teacher
+                    <br>
+                }
+            </span>
+        </p>
+        <p>
+            <span class="circle"><i class="fa-solid fa-location-dot"></i></span>
+            <span>
+                @foreach (var classroom in Course.ClassroomDtos)
+                {
+                    <a href="/campus/@classroom.Building.CampusId/building/@classroom.Building.Id/classroom/@classroom.Id">  
+                        <span class="classroom-description">@classroom.Description</span> <br>
+                    </a>
+                }
+            </span>
+        </p>
+        <p>
+            <span class="circle"><i class="fa-solid fa-people-group"></i></span>
+            <span>
+                @string.Join(", ", Course.ClassgroupNames)
+            </span>
+        </p>
+    </div>
+    <div class="course-info">
+        <p><span class="label">Type:</span> <span class="value">@Course.LessonType</span></p>
+        <p><span class="label">Start:</span> <span class="value">@Course.Start.ToString("HH:mm")</span></p>
+        <p><span class="label">@Loc["End"]</span> <span class="value">@Course.End.ToString("HH:mm")</span></p>
+    </div>
+</div>
+
+@code {
+    [Parameter] public LessonDto.Index Course { get; set; } = null!;
+    [Parameter] public EventCallback OnClose { get; set; }
+}

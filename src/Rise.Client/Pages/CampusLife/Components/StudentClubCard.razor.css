@@ -1,0 +1,46 @@
+.club-card {
+    display: flex;
+    background-color: #fff;
+    width: 100%;
+    margin-bottom: 60px;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.club-card .image {
+    flex: 0 0 25%;
+    max-width: 80px;
+}
+
+.club-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+}
+
+.club-card .info {
+    flex: 1;
+    padding-left: 15px;
+}
+
+.info p {
+    font-size: 0.85rem;
+}
+
+.club-links {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.club-links i {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.club-links i:hover {
+    color: black;
+}

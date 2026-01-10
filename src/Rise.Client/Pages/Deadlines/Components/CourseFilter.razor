@@ -1,0 +1,23 @@
+<div class="select is-fullwidth">
+    <select @onchange="OnSelectedCourseChanged">
+        <option value="">@Label</option>
+        @foreach (var course in Courses)
+        {
+            <option value="@course">@course</option>
+        }
+    </select>
+</div>
+
+@code
+{
+    [Parameter] public required string SelectedCourse { get; set; }
+    [Parameter] public EventCallback<string> SelectedCourseChanged { get; set; }
+    [Parameter] public required string Label { get; set; }
+    [Parameter] public required IEnumerable<string> Courses { get; set; }
+    
+    private async Task OnSelectedCourseChanged(ChangeEventArgs e)
+    {
+        SelectedCourse = e.Value?.ToString() ?? string.Empty;
+        await SelectedCourseChanged.InvokeAsync(SelectedCourse);
+    }
+}

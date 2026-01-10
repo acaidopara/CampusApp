@@ -1,0 +1,24 @@
+@using Microsoft.Extensions.Localization
+@using Newtonsoft.Json
+@using Rise.Client.Resources.Pages.Settings
+@using Rise.Shared.Student
+@using Blazor.WebAssembly.DynamicCulture
+@using System.Text.Json
+@inject IStringLocalizer<Settings> Loc
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject ISnackbar Snackbar
+@inject IStudentService StudentService
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div class="campusvoorkeur-container">
+    <label for="campusvoorkeur">@Loc["CampusPreference"]</label>
+    <select id="campusvoorkeur" value="@_selectedCampus" @onchange="OnCampusChanged" disabled="@_isLoading">
+        <option value="" disabled selected>@Loc["SelectCampus"]</option>
+        <option value="Aalst">Aalst</option>
+        <option value="Bijloke">Bijloke</option>
+        <option value="Ledeganck">Ledeganck</option>
+        <option value="Mercator">Mercator</option>
+        <option value="Schoonmeersen">Schoonmeersen</option>
+    </select>
+</div>

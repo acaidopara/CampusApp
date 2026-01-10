@@ -1,0 +1,28 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Pages.News.Components
+@using Rise.Shared.CampusLife.Jobs
+
+@inject IStringLocalizer<Resources.MainComponents.Filtering.Filter> Loc
+@inject IConfiguration Config
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+<a href="/vacatures/@Job.Id">
+    <div class="job-card">
+        <div class="image">
+            <img src="@($"{Config["ImageBasePath"]}/{Job.ImageUrl}")" alt="@Job.CompanyName" class="job-card-image"/>
+        </div>
+        <div class="info">
+            <TopicLabel Label="@Job.JobCategory"/>
+            <h3 class="mt-2">@Job.Name</h3>
+            <p class="mb-5">@Job.CompanyName</p>
+            <p>@Job.StartDate.ToString("dd/MM/yyyy") - @Job.EndDate.ToString("dd/MM/yyyy")</p>
+        </div>
+    </div>
+</a>
+
+@code {
+    [Parameter] public required JobDto.Index Job { get; set; }
+    [Inject] NavigationManager NavigationManager { get; set; } = default!;
+}

@@ -1,0 +1,20 @@
+<div class="week-selector">
+    <div class="arrow-left">
+        <button @onclick="PreviousWeek">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <div class="current-week">
+        <div>
+            <p><strong>Week @_week</strong></p>
+            <p>@_currentDate.ToString("dd MMMM yyyy")</p>
+        </div>
+    </div>
+
+    <div class="arrow-right">
+        <button @onclick="NextWeek">
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+    </div>
+</div>

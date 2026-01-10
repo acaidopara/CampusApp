@@ -1,0 +1,136 @@
+.timetable-grid {
+    margin-top: 1rem;
+    background: white;
+    border-radius: 12px;
+    border-collapse: collapse;
+}
+
+.grid-header {
+    display: grid;
+    grid-template-columns: 80px repeat(5, 1fr);
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.grid-deadlines {
+    display: grid;
+    grid-template-columns: 80px repeat(5, 1fr);
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.day-header {
+    text-align: center;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: capitalize;
+    border-left: 1px solid #e0e0e0;
+}
+
+.day-header:first-of-type {
+    border-left: 2px solid #e0e0e0;
+}
+
+.day-header.today {
+    position: relative;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.day-header.today::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 4px;
+    background-color: var(--secondary-color);
+}
+
+.grid-body {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.hour-row {
+    display: grid;
+    grid-template-columns: 80px repeat(5, 1fr);
+}
+
+.time-label {
+    padding: 0.5rem 0.5rem 0 0.5rem;
+    font-size: 14px;
+    color: #666;
+    border-top: 1px solid #e0e0e0;
+}
+
+.day-cell {
+    position: relative;
+    border-top: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+    min-height: 80px;
+    background-color: #fff;
+}
+
+.quarter {
+    height: 25%;
+    border-bottom: 1px dashed #f0f0f0;
+}
+
+.day-cell:first-of-type {
+    border-left: 2px solid #e0e0e0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}
+
+.overlay-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}
+
+.lesson-container {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+}
+
+.deadlines-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 10;
+}
+
+.deadline-block {
+    background-color: #FFF3CD;
+    color: #856404;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-align: center;
+}

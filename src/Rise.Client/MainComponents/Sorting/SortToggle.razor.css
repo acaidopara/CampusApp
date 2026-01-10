@@ -1,0 +1,16 @@
+.sort-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 7px;
+    color: black;
+}
+
+.sort-toggle button {
+    width: 100%;
+    gap: 10px;
+}
+

@@ -1,0 +1,13 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Resources.Layout.Footer.Footer> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+<div>
+    <MudHidden Breakpoint="Breakpoint.MdAndDown">
+        <footer>
+            &copy; @DateTime.Now.Year - HOGENT. @Loc["Title"].Value
+        </footer>
+    </MudHidden>
+</div>

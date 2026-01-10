@@ -1,0 +1,43 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Campus
+@using Rise.Shared.Infrastructure
+@inject IStringLocalizer<Campus> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+<div class="campus-selection-overlay">
+    <div class="overlay-header">
+        <span class="overlay-title">@Loc["SelectCampus"].Value</span>
+        <MudIconButton Icon="@Icons.Material.Filled.Close" 
+                       Color="Color.Inherit"
+                       Class="p-0"
+                       OnClick="async () => await CloseCampusSelection.InvokeAsync()"/>
+    </div>
+    <div class="campus-list">
+        @if (Campuses != null)
+        {
+            @foreach (var campus in Campuses)
+            {
+                <div class="campus-item" @onclick="async () => await SelectSpecificCampus.InvokeAsync(campus)">
+                    <div class="campus-item-details">
+                        <span class="campus-item-name">@campus.Name</span>
+                        <span
+                            class="campus-item-address">@campus.Address.AddressLine1 @campus.Address.AddressLine2, @campus.Address.City @campus.Address.PostalCode</span>
+                    </div>
+                    <MudIcon Icon="@Icons.Material.Filled.ChevronRight"/>
+                </div>
+            }
+        }
+        else
+        {
+            <p>@Loc["Loading"]</p>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public List<CampusDto.Index>? Campuses { get; set; }
+    [Parameter] public required EventCallback CloseCampusSelection { get; set; }
+    [Parameter] public required EventCallback<CampusDto.Index> SelectSpecificCampus { get; set; }
+}

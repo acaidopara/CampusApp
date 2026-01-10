@@ -1,0 +1,20 @@
+<div class="top-section" 
+     style="padding-bottom:@(Title is null ? "10px" : "30px");
+         margin-top:@(BackLinkUrl is null ? "20px" : "0")">
+    @if (BackLinkUrl is not null)
+    {
+        <a href="@BackLinkUrl" class="back-link" style="margin-bottom:@(Title is null ? "0" : "10px")">
+            <MudIcon Icon="@Icons.Material.Filled.ArrowRightAlt" Title="Back"/>
+        </a>
+    }
+    @if (Title is not null)
+    {
+        <div class="week-info">
+            <h2>@Title</h2>
+            @if (!string.IsNullOrEmpty(Subtitle))
+            {
+                <p>@Subtitle</p>
+            }
+        </div>
+    }
+</div>

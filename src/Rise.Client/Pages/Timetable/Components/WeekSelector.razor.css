@@ -1,0 +1,9 @@
+.week-selector{
+    background-color: #000000;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 25px 10px 25px;
+    border: 1px solid black;
+    text-align: center;
+}

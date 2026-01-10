@@ -1,0 +1,83 @@
+.notification-card {
+    max-width: 100%;
+    margin-top: 2.5rem;
+    padding: 0;
+    background: var(--card-bg, #ffffff);
+    box-shadow: 0 6px 18px rgba(18, 38, 63, 0.06);
+    color: var(--text-color, #1f2937);
+    overflow: hidden;
+}
+
+.notification-card-header {
+    background-color: var(--secondary-color);
+    color: #fff;
+    position: relative;
+    height: 170px;
+    min-height: 110px;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+a {
+    color: white !important;
+}
+
+.notification-card-header ::deep .mud-icon-button.back-btn {
+    color: #fff;
+    background: transparent;
+    box-shadow: none;
+    transform: scaleX(-1);
+    padding: 0px;
+    margin-bottom: 1.5rem;
+    
+}
+
+.notification-card-date {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+}
+
+.notification-card-title {
+  margin: 0;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.05;
+  font-size: clamp(1.4rem, 4vw + 0.5rem, 3rem);
+}
+
+.notification-card-body {
+  padding: 1.75rem;
+  background: var(--card-bg, #ffffff);
+  color: var(--body-color, #111827);
+}
+
+.notification-card-message {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* small screens: header minder hoog en knop iets kleiner */
+@media (max-width: 800px) {
+    .notification-card-header {
+        min-height: 140px;
+        padding: 1rem;
+        max-height: 100%
+    }
+
+    .notification-card-header-content {
+        max-width: 80%;
+        max-height: 100%;
+    }
+
+    .notification-card {
+        margin-top: 0;
+    }
+
+    .notification-card-title {
+        font-size: 1.4rem;
+    }
+}

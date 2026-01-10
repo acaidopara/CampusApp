@@ -1,0 +1,15 @@
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.Resources.MainComponents.Dashboard
+
+
+@inject IStringLocalizer<Dashboard> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div class="alert-section">
+    <MudAlert Severity="Severity.Info">
+        <span>@Loc["Absences"]</span><br/> 
+        @string.Join(", ", Abscences ?? Enumerable.Empty<string>()) @( (Abscences?.Count ?? 0) == 1 ? Loc["IsAbsentToday"] : Loc["AreAbsentToday"] )
+    </MudAlert>
+</div>

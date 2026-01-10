@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>26573a96-5693-41e5-b1d5-a0425b90fd5c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="FastEndpoints" />
+    <Using Include="Ardalis.Result" />
+    <Using Include="Serilog" />
+  </ItemGroup>
+
+  <ItemGroup>
+      <PackageReference Include="BlazorPanzoom" Version="0.2.1" />
+      <PackageReference Include="DotNetEnv" Version="3.1.1" />
+    <PackageReference Include="FastEndpoints" Version="7.0.1" />
+    <PackageReference Include="FastEndpoints.Security" Version="7.0.1" />
+    <PackageReference Include="FastEndpoints.Swagger" Version="7.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.9" />
+    <PackageReference Include="prometheus-net.AspNetCore" Version="8.2.1" />
+    <PackageReference Include="WebPush" Version="1.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rise.Client\Rise.Client.csproj" />
+    <ProjectReference Include="..\Rise.Persistence\Rise.Persistence.csproj" />
+    <ProjectReference Include="..\Rise.Services\Rise.Services.csproj" />
+    <ProjectReference Include="..\Rise.Shared\Rise.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
+

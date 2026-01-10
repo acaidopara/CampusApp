@@ -1,0 +1,103 @@
+﻿@page "/resto"
+@page "/campus/{campusId:int}/building/{buildingId:int}/resto"
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Filtering
+@using Rise.Client.Pages.Resto.Components
+@using Blazor.WebAssembly.DynamicCulture
+@using MudBlazor
+@using Rise.Client.Resources.Pages.Resto
+@using System.Threading.Tasks
+@using Rise.Client.MainComponents.Common
+@inject IStringLocalizer<Resto> Loc
+@inject ISnackbar Snackbar
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>@Loc["Restaurant"]</PageTitle>
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+@if(_isLoading){<Loader/>}else{
+<div class="resto-section">
+    <TopPage BackLinkUrl="" Title="@Loc["RestoWeekmenu"].Value" Subtitle="@($"{Loc["WeekOf"]} {MondayDate:dd/MM}")" />
+   <SelectField 
+    Label="@Loc["ChooseCampus"].Value"
+    Placeholder="@Loc["SelectCampus"].Value"
+    Items="_campuses.Select(t => t.campusName).ToList()"
+    @bind-Value="_geselecteerdeCampus"
+    OnChange="HandleCampusChange" />
+    
+    @* DIET INFO *@
+    <div class="diet-info">
+        <span class="diet-item">
+            <div class="diet-item vegan-toggle filter-option" @onclick="ToggleVeggie">
+                <i class="fa-solid mr-3 @(_isVeggie ? "fa-square-check" : "fa-square")"
+                    style="color: @(_isVeggie ? "#4CAF50" : "#EEEEEE");"></i>
+
+            </div>
+            <p>@Loc["VeggieHalal"]</p>
+            <MudIcon Icon="@Icons.Material.Filled.ExpandMore" Size="Size.Small" Style="color: #A5CA72;" />
+        </span>
+        <span class="diet-item circle-check">
+            <div class="diet-item vegan-toggle filter-option" @onclick="ToggleVegan">
+                <i class="fa-solid mr-1 @(_isVegan ? "fa-square-check" : "fa-square")"
+                    style="color: @(_isVegan ? "#4CAF50" : "#EEEEEE");"></i>
+
+            </div>
+            <p>@Loc["VeganHalal"]</p>
+            <VeganIcon />
+        </span>
+        <span class="diet-item full-width margin-left">
+            <MudIcon Icon="@Icons.Material.Filled.Info" Size="Size.Small" Class="info-icon" />
+            <p>@Loc["AllergensInfo"]</p>
+        </span>
+
+
+    </div>
+
+    @* MENU ITEMS *@
+    @if (!string.IsNullOrEmpty(_geselecteerdeCampus) && _isRestosLoading == false)
+    {
+
+        <div class="weekmenu">
+            @foreach (var resto in GetRestosFromCampus(_geselecteerdeCampus))
+            {
+                <CampusGroup ShowVegan=@(_isVegan) ShowVeggie=@(_isVeggie) Value="@(resto)"
+                    IsExpanded="@(resto.Id == _expandedRestoId)" OnExpandRequested="@(id => HandleExpandRequested(id))" />
+            }
+
+
+        </div>
+    }
+</div>
+}
+
+@code {
+    private int? _expandedRestoId;
+
+    private Task HandleExpandRequested(int? id)
+    {
+        _expandedRestoId = id;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private void ToggleVegan()
+    {
+        _isVegan = !_isVegan;
+    }
+    private void ToggleVeggie()
+    {
+        _isVeggie = !_isVeggie;
+    }
+    private async Task HandleCampusChange(string campus)
+    {
+        int campusId  = _campuses.Where(t => t.campusName.Equals(campus)).Select(x=>x.id).First();
+
+        await FetchRestos(campusId);
+        _geselecteerdeCampus = campus;
+        var campuses = GetRestosFromCampus(_geselecteerdeCampus);
+        if (campuses.Count == 1)
+        {
+            await HandleExpandRequested(campuses[0].Id);
+        }
+    }
+}

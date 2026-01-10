@@ -1,0 +1,72 @@
+<!-- timetable.en (English) -->
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Title" xml:space="preserve">
+        <value>Timetable</value>
+    </data>
+    <data name="MyTimetable" xml:space="preserve">
+        <value>My timetable</value>
+    </data>
+    <data name="TeachersPlural" xml:space="preserve">
+        <value>Teachers:</value>
+    </data>
+    <data name="TeacherSingular" xml:space="preserve">
+        <value>Teacher:</value>
+    </data>
+    <data name="ClassroomsPlural" xml:space="preserve">
+        <value>Classrooms:</value>
+    </data>
+    <data name="ClassroomSingular" xml:space="preserve">
+        <value>Classroom:</value>
+    </data>
+    <data name="Type" xml:space="preserve">
+        <value>Type:</value>
+    </data>
+    <data name="Start" xml:space="preserve">
+        <value>Start:</value>
+    </data>
+    <data name="End" xml:space="preserve">
+        <value>End:</value>
+    </data>
+    <data name="NoLessons" xml:space="preserve">
+        <value>You have no classes.</value>
+    </data>
+    <data name="ViewDeadlines" xml:space="preserve">
+        <value>View your deadlines</value>
+    </data>
+    <data name="Week" xml:space="preserve">
+        <value>Week</value>
+    </data>
+    <data name="Mon" xml:space="preserve">
+        <value>Mon</value>
+    </data>
+    <data name="Tue" xml:space="preserve">
+        <value>Tue</value>
+    </data>
+    <data name="Wed" xml:space="preserve">
+        <value>Wed</value>
+    </data>
+    <data name="Thu" xml:space="preserve">
+        <value>Thu</value>
+    </data>
+    <data name="Fri" xml:space="preserve">
+        <value>Fri</value>
+    </data>
+    <data name="Today" xml:space="preserve">
+        <value>Go to today</value>
+    </data>
+    <data name="Om" xml:space="preserve">
+        <value>at</value>
+    </data>
+</root>

@@ -1,0 +1,13 @@
+<a href="/lessenrooster/@Id"> 
+    <div class="class-schedule-block">
+        <DateBlock Date="@Start" MonthFormat="ddd" />
+        <div class="class-schedule-info">
+            <div>
+                <p>@Start.ToString("H.mm") - @End.ToString("H.mm")</p>
+                <p>@LessonType</p>
+            </div>
+            <h2>@Name</h2>
+            <p>@Room</p>
+        </div>
+    </div>
+</a>

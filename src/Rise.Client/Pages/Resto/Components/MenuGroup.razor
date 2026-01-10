@@ -1,0 +1,34 @@
+@using Rise.Shared.Resto
+
+<div class="menu-container">
+    <div class="menu-card">
+        <div class="menu-group-header">
+            @GroupName
+        </div>
+        <div class="menu-group-info">
+            <MudList T="MenuItemDto" Dense="true" ReadOnly="true">
+                @foreach (var entry in Entries)
+                {
+                    <MudListItem clickable="false">
+                        <div>
+                            <p>@entry.Description</p>
+                            @if (entry.IsVeganAndHalal)
+                            {
+                                <VeganIcon />
+                            }
+                            @if (entry.IsVeggieAndHalal)
+                            {
+                                <MudIcon Icon="@Icons.Material.Filled.ExpandMore" Size="Size.Small" Style="color: #A5CA72;" />
+                            }
+                        </div>
+                    </MudListItem>
+                }
+            </MudList>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string GroupName { get; set; } = string.Empty;
+    [Parameter] public IEnumerable<MenuItemDto> Entries { get; set; } = [];
+}

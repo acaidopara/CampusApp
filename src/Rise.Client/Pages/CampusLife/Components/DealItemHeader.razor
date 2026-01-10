@@ -1,0 +1,31 @@
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Pages.News.Components
+@using Rise.Client.Resources.Pages.CampusLife
+@using Rise.Shared.CampusLife
+@using Rise.Shared.CampusLife.StudentDeals
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@inject IJSRuntime Js
+@inject IStringLocalizer<CampusLife> Loc
+@inject IConfiguration Config
+
+<div class="detail-header" style="background-image: url(@($"{Config["ImageBasePath"]}/{Item?.ImageUrl}")">
+    <div class="image-overlay"></div>
+    <div class="header-content">
+        <MudIconButton Icon="@Icons.Material.Filled.ArrowRightAlt"
+                       OnClick="@(() => NavigationManager.NavigateTo($"/{Page}"))" />
+
+        <p class="detail-date">@Item?.Store</p>
+        <h2>@Item?.Name</h2>
+        
+        <TopicLabel 
+            Label="@Item?.PromoCategory"
+            Icon="@(CategoriesPromo.AllCategories.FirstOrDefault(t => t.Name == Item?.PromoCategory)?.Icon)" />
+        
+        <div class="share-icon">
+            <MudIconButton Icon="@Icons.Material.Filled.Link"
+                           OnClick="CopyLink"
+                           title="@Loc["CopyLink"]"/>
+        </div>
+    </div>
+</div>

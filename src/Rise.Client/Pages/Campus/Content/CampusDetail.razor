@@ -1,0 +1,61 @@
+@page "/campus/{CampusId:int}"
+
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.Pages.Campus.Components
+@using Rise.Client.Resources.Pages.Campus
+@using Rise.Shared.Infrastructure
+@using Rise.Client.MainComponents.Dashboard
+@using Blazor.WebAssembly.DynamicCulture
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+@inject IStringLocalizer<Campus> Loc
+@inject IInfrastructureService InfrastructureService
+
+@if (_isLoading)
+    {
+        <Loader></Loader>
+    }
+else
+{
+    if (_campus != null)
+    {
+        <DetailHeader
+            Title="@_campus.Name"
+            ImageUrl="@_campus.ImageUrl"
+            Street="@($"{_campus.Address.AddressLine1} {_campus.Address.AddressLine2}")"
+            Town="@($"{_campus.Address.PostalCode} {_campus.Address.City}")"/>
+
+        <div class="detail-info">
+            <AboutSection
+                Title="@Loc["AboutCampus"].Value"
+                Description="@_campus.Description"
+                ReadMoreText="@Loc["ReadMore"].Value"
+                ReadLessText="@Loc["ReadLess"].Value"
+                MaxLength="100"/>
+
+            <div>
+                <h3>@Loc["Facilities"]</h3>
+                @if (!_campus.Facilities.BikeStorage && !_campus.Facilities.Cafeteria && !_campus.Facilities.Library && !_campus.Facilities.Lockers && !_campus.Facilities.ParkingLot && !_campus.Facilities.Restaurant && !_campus.Facilities.RevolteRoom && !_campus.Facilities.RitaHelpdesk && !_campus.Facilities.SportsHall && !_campus.Facilities.StudentShop && !_campus.Facilities.Stuvo)
+                {
+                    <AlertSection Title=@Loc["NoFacilities"].Value Message=@Loc["CampusNoFac"].Value Severity="Severity.Info"/>
+                }
+                else
+                {
+                    <FacilitySection Facilities="@_campus.Facilities"/>
+                }
+            </div>
+
+            <div class="button-div2">
+                @if (!string.IsNullOrEmpty(_campus.TourUrl))
+                {
+                    <CommonLinkButton Text="@Loc["Tour"].Value" Href="@_campus.TourUrl" Icon="@Icons.Material.Filled.RemoveRedEye"/>
+                }
+                <CommonLinkButton Text="@Loc["GoogleMaps"].Value" Href="@_campus.MapsUrl" Icon="@Icons.Material.Filled.Navigation"/>
+                
+
+            </div>
+
+        </div>
+    }
+}

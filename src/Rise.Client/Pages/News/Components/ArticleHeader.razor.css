@@ -1,0 +1,52 @@
+.article-page .article-header {
+    background-position: left;
+    background-size: cover;
+    color: white;
+    position: relative;
+    display: flex;
+    padding: 30px;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.article-header ::deep .mud-icon-button {
+    color: #fff;
+    padding: 0;
+    transform: scaleX(-1);
+    margin-bottom: 80px;
+}
+
+.header-content {
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+.article-date {
+    color: #C1C1C5;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+.article-time {
+    font-size: 0.9rem;
+}
+
+.share-icon {
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.article-header ::deep .filter-chip {
+    border: none;
+}

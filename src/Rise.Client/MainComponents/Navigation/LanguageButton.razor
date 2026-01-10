@@ -1,0 +1,11 @@
+@using System.Globalization
+@using Blazor.WebAssembly.DynamicCulture.LocalizationManager
+@using Blazor.WebAssembly.DynamicCulture.Services
+
+@inject LocalizationLocalStorageManager LocalizationLocalStorageManager
+@inject ILocalizationService LocalizationService
+
+<div class="language-switch">
+    <span class="@GetLanguageClass("nl")" @onclick='() => OnCultureChangedAsync("nl")'>NL</span> | 
+    <span class="@GetLanguageClass("en")" @onclick='() => OnCultureChangedAsync("en")'>EN</span>
+</div>

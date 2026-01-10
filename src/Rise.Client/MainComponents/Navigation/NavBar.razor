@@ -1,0 +1,101 @@
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.Resources.MainComponents.Navigation
+@inherits NavBase
+@inject IStringLocalizer<Navigation> Loc
+@inject IConfiguration Config
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+@* DESKTOP *@
+<MudHidden Breakpoint="Breakpoint.MdAndDown">
+    <header>
+        <MudAppBar Elevation="0" Style="z-index: 1000">
+            <MudIconButton Href="/" Edge="Edge.Start">
+                <img src="@($"{Config["ImageBasePath"]}/HOGENT_Logo_Wit.png")" alt="@Loc["HogentLogo"]" style="height:38px;"/>
+            </MudIconButton>
+
+            <MudSpacer/>
+
+            <div class="nav-links">
+                <MudNavLink Href="@null" 
+                            OnClick="@(() => ProtectedNav.NavigateTo("/", "Home"))" 
+                            Match="NavLinkMatch.All"
+                            Class="@(IsActive("/") ? "mud-nav-link-active" : "")">@Loc["Home"]</MudNavLink>
+                <MudNavLink Href="@null" 
+                            OnClick="@(() => ProtectedNav.NavigateTo("nieuws-en-events", "News"))" 
+                            Class="@(IsActive("nieuws-en-events") ? "mud-nav-link-active" : "")">@Loc["News"]</MudNavLink>
+                <MudNavLink Href="@null" 
+                            OnClick="@(() => ProtectedNav.NavigateTo("campus", "Campus"))" 
+                            Class="@(IsActive("campus") ? "mud-nav-link-active" : "")">@Loc["Campus"]</MudNavLink>
+                <MudNavLink Href="@null" 
+                            OnClick="@(() => ProtectedNav.NavigateTo("lessenrooster", "Timetable"))" 
+                            Class="@(IsActive("lessenrooster") ? "mud-nav-link-active" : "")"
+                            Style="@(IsProtectedDisabled("lessenrooster") ? "opacity: 0.5; cursor: not-allowed;" : "")">@Loc["Timetable"]</MudNavLink>
+                <MudNavLink Href="@null" 
+                            OnClick="@(() => ProtectedNav.NavigateTo("deadlines", "Deadlines"))" 
+                            Class="@(IsActive("deadlines") ? "mud-nav-link-active" : "")"
+                            Style="@(IsProtectedDisabled("deadlines") ? "opacity: 0.5; cursor: not-allowed;" : "")">@Loc["Deadlines"]</MudNavLink>
+            </div>
+
+            <MudSpacer/>
+            
+            <AuthorizeView>
+                <Authorized>
+                    <a href="studentenkaart"><i class="fa-regular fa-address-card" style="font-size: 20px; color: #fff; padding: 12px;"></i></a>
+                </Authorized>
+                <NotAuthorized />
+            </AuthorizeView>
+
+            @if (IsAuthenticated)
+            {
+                <div class="notification-wrapper">
+                    <MudIconButton Href="notificaties" Icon="@Icons.Material.Filled.Notifications" Color="Color.Inherit" />
+                    @if (_unreadCount > 0)
+                    {
+                        <span class="notification-badge"></span>
+                    }
+                </div>
+            }
+
+            <NavbarDropdown/>
+
+        </MudAppBar>
+    </header>
+</MudHidden>
+
+@* MOBILE *@
+@if (ShowTopNav)
+{
+    <MudHidden Breakpoint="Breakpoint.LgAndUp">
+        <header>
+            <MudAppBar Elevation="0" Style="padding: 5px 0; z-index: 1000">
+
+                <MudIconButton Href="/" Edge="Edge.Start">
+                    <img src="@($"{Config["ImageBasePath"]}/HOGENT_Logo_Wit.png")" alt="@Loc["HogentLogo"]" style="height:38px;" />
+                </MudIconButton>
+
+                <MudSpacer/>
+
+                <AuthorizeView>
+                    <Authorized>
+                        <a href="studentenkaart"><i class="fa-regular fa-address-card" style="font-size: 20px; color: #fff; padding: 12px;"></i></a>
+                    </Authorized>
+                    <NotAuthorized/>
+                </AuthorizeView>
+
+                @if (IsAuthenticated)
+                {
+                    <div class="notification-wrapper">
+                        <MudIconButton Href="notificaties" Icon="@Icons.Material.Filled.Notifications" Color="Color.Inherit" />
+                        @if (_unreadCount > 0)
+                        {
+                            <span class="notification-badge"></span>
+                        }
+                    </div>
+                }
+                <NavbarHamburger/>
+            </MudAppBar>
+        </header>
+    </MudHidden>
+}

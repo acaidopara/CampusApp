@@ -1,0 +1,12 @@
+<div class="chip-container">
+    @foreach (var item in Items)
+    {
+        <div class="chip-wrapper">
+            <FilterChip Label="@item.Label"
+                        Icon="@item.Icon"
+                        IsActive="(item.Label == SelectedItem)"
+                        UnreadCount="UnreadCount"
+                        OnClick="@(() => SelectItem(item.Label))" />
+        </div>
+    }
+</div>

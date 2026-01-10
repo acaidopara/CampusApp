@@ -1,0 +1,32 @@
+<div class="alert-section @(IsHidden ? "hidden-margin" : "")">
+    @if (!IsHidden && !string.IsNullOrEmpty(Title))
+    {
+        <div class="alert-wrapper">
+            @if (!string.IsNullOrEmpty(Link))
+            {
+                    <MudAlert Severity="@Severity">
+                        <a href="@Link" class="alert-link">
+                            <span>@Title</span><br />
+                            <div class="alert-message">@Message</div>
+                        </a>
+                        @if (ShowCloseButton)
+                        {
+                            <button class="close-btn" @onclick="CloseAlert">×</button>
+                        }
+                    </MudAlert>
+            }
+            else
+            {
+                <MudAlert Severity="@Severity" Class="@(isOflineMessage?"offline-alert-padding":"")">
+                    <span>@Title</span><br/>
+                    <div class="alert-message">@Message</div>
+                    @if (ShowCloseButton)
+                    {
+                        <button class="close-btn" @onclick="CloseAlert">×</button>
+                    }
+                </MudAlert>
+            }
+        </div>
+    }
+</div>
+

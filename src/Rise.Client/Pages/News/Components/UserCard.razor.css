@@ -1,0 +1,15 @@
+.usercard {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info p:first-of-type {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.info p:last-of-type {
+    font-size: 0.9rem;
+    color: #C1C1C5;
+}

@@ -1,0 +1,21 @@
+@inject NavigationManager NavigationManager
+@inject IConfiguration Config
+
+<div class="detail-header" style="background-image: url(@($"{Config["ImageBasePath"]}/{@ImageUrl}"))">
+    <div class="image-overlay"></div>
+    <div class="header-content">
+        <MudIconButton Icon="@Icons.Material.Filled.ArrowRightAlt"
+                       OnClick="@(() => NavigationManager.NavigateTo("/campus"))" />
+
+        <h2>@Title</h2>
+        <p>@Street</p>
+        <p>@Town</p>
+    </div>
+</div>
+
+@code {
+    [Parameter] public required string ImageUrl { get; set; }
+    [Parameter] public required string Title { get; set; }
+    [Parameter] public required string Street { get; set; }
+    [Parameter] public required string Town { get; set; }
+}

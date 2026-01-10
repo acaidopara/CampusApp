@@ -1,0 +1,34 @@
+@using Rise.Shared.CampusLife.StudentClub
+@inject IConfiguration Config
+
+<div class="club-card">
+    <div class="image">
+        <img src="@($"{Config["ImageBasePath"]}/{Club.ShieldImageUrl}")" alt="club-schild"/>
+    </div>
+    <div class="info">
+        <h3>@Club.Name</h3>
+        <p>@Club.Description</p>
+        <div class="club-links">
+            @if (Club.WebsiteUrl is not null)
+            {
+                <a href="@Club.WebsiteUrl"><i class="fa-solid fa-globe"></i></a>
+            }
+            @if (Club.FacebookUrl is not null)
+            {
+                <a href="@Club.FacebookUrl"><i class="fa-brands fa-facebook"></i></a>
+            }
+            @if (Club.InstagramUrl is not null)
+            {
+                <a href="@Club.InstagramUrl"><i class="fa-brands fa-instagram"></i></a>
+            }
+            @if (Club.Email is not null)
+            {
+                <a href="mailto:@Club.Email"><i class="fa-solid fa-envelope"></i></a>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public required StudentClubDto.Index Club { get; set; }
+}

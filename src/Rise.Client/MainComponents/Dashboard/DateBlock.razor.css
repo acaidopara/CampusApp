@@ -1,0 +1,20 @@
+.class-schedule-day {
+    padding: 15px 20px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.class-schedule-day p {
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    word-break: normal;
+    hyphens: none;
+}
+
+.class-schedule-day p:nth-of-type(2) {
+    font-size: 2rem;
+}

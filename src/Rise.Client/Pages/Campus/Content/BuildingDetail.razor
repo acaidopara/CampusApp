@@ -1,0 +1,58 @@
+@page "/campus/{CampusId:int}/building/{BuildingId:int}/detail"
+
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.MainComponents.Dashboard
+@using Rise.Client.Pages.Campus.Components
+@using Rise.Shared.Infrastructure
+@using Rise.Client.Resources.Pages.Campus
+@using Blazor.WebAssembly.DynamicCulture
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+@inject IStringLocalizer<Campus> Loc
+@inject IInfrastructureService InfrastructureService
+
+
+<div>
+    @if (_isLoading)
+    {
+        <Loader></Loader>
+    }
+    else
+    {
+        <DetailHeader
+            Title="@_building?.Name"
+            ImageUrl="@_building?.ImageUrl"
+            Street="@($"{_building?.Address.AddressLine1} {_building?.Address.AddressLine2}")"
+            Town="@($"{_building?.Address.PostalCode} {_building?.Address.City}")"/>
+
+        <div class="detail-info">
+            <AboutSection
+                Title="@Loc["AboutBuilding"].Value"
+                Description="@_building!.Description"
+                ReadMoreText="@Loc["ReadMore"].Value"
+                ReadLessText="@Loc["ReadLess"].Value"
+                MaxLength="100"/>
+
+            <div>
+                <h3>@Loc["Facilities"]</h3>
+                @if (!_building.Facilities.BikeStorage && !_building.Facilities.Cafeteria && !_building.Facilities.Library && !_building.Facilities.Lockers && !_building.Facilities.ParkingLot && !_building.Facilities.Restaurant && !_building.Facilities.RevolteRoom && !_building.Facilities.RitaHelpdesk && !_building.Facilities.SportsHall && !_building.Facilities.StudentShop && !_building.Facilities.Stuvo)
+                {
+                    <AlertSection Title=@Loc["NoFacilities"].Value Message=@Loc["BuildingNoFac"].Value Severity="Severity.Info"/>
+                }
+                else
+                {
+                    <FacilitySection Facilities="@_building.Facilities"/>
+                }
+            </div>
+
+            <div class="button-div2">
+                @if (_building.Facilities.Restaurant)
+                {
+                    <CommonLinkButton Text="@Loc["Menu"].Value" Href="@($"/campus/{CampusId}/building/{BuildingId}/resto")"/>
+                }
+                <CommonLinkButton Text="@Loc["ViewOnMap"].Value" Href="@($"/campus/{CampusId}/building/{BuildingId}")"/>
+            </div>
+        </div>
+    }
+</div>

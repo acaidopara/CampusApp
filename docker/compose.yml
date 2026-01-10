@@ -1,0 +1,12 @@
+services:
+  db:
+    image: mysql/mysql-server:8.0.19
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "13306:3306"

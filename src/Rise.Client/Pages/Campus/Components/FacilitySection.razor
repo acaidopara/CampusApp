@@ -1,0 +1,10 @@
+@using Rise.Shared.Infrastructure
+<div class="facilities-grid">
+    @foreach (var facility in _list)
+    {
+        if (facility.IsAvailable)
+        {
+            <FacilityItem Title="@facility.Title" Icon="@facility.Icon"/>
+        }
+    }
+</div>

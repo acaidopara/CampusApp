@@ -1,0 +1,33 @@
+@page "/contact"
+@using Rise.Shared.Departments
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.Pages.Contact.Components
+@using Rise.Client.Resources.Pages.Contact
+@inject IDepartmentService DepartmentService
+@inject IStringLocalizer<Contact> Loc
+@inject NavigationManager Nav
+
+<PageTitle>@Loc["Contact"]</PageTitle>
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+@if (_isLoading)
+{
+    <Loader/>
+}
+else
+{
+    <LetterHeader ImageName="contact.jpg" Title="Contact" BackLinkUrl="/"/>
+    <div class="mx-8 mx-lg-10 mb-10">
+        <MudGrid Class="mx-auto" Spacing="0">
+            <MudItem xs="12" Class="mx-lg-10">
+                <OverviewContact 
+                    Departments="_department" 
+                    Managers="_management" 
+                    Others="_other" 
+                    OnSelectDepartment="OnDepartmentSelected"/>
+            </MudItem>
+        </MudGrid>
+    </div>
+}

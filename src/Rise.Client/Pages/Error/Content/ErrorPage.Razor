@@ -1,0 +1,28 @@
+@page "/error"
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.MainComponents.Common
+
+
+@inject NavigationManager Nav
+@inject IStringLocalizer<Error> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div>
+    <ErrorDisplay Title=@Loc["ErrorTitle"].Value
+                  ErrorCode="@ErrorCode" 
+                  Message=@Loc["ErrorMessage"].Value />
+</div>
+
+
+@code {
+    private string? ErrorCode { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var uri = new Uri(Nav.Uri);
+        var queryParams = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        ErrorCode = queryParams["code"] ?? "500"; 
+    }
+}

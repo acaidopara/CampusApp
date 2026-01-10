@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="LogIn" xml:space="preserve">
+  <value>Inloggen</value>
+</data>
+    <data name="Email" xml:space="preserve">
+  <value>E-mail</value>
+</data>
+    <data name="Password" xml:space="preserve">
+  <value>Wachtwoord</value>
+</data>
+    <data name="DevelopmentLogin" xml:space="preserve">
+  <value>Development Login</value>
+</data>
+    <data name="ContinueAs" xml:space="preserve">
+        <value>Ga door als</value>
+    </data>
+    <data name="ImageAlt" xml:space="preserve">
+        <value>2 glimlachende studenten</value>
+    </data>
+    <data name="Guest" xml:space="preserve">
+        <value>Gast</value>
+    </data>
+    <data name="EmailRequired" xml:space="preserve">
+        <value>E-mail is verplicht</value>
+    </data>
+    <data name="EmailInvalid" xml:space="preserve">
+        <value>E-mail is ongeldig</value>
+    </data>
+    <data name="PwdInvalid" xml:space="preserve">
+        <value>Wachtwoord is ongeldig</value>
+    </data>
+    <data name="LoggedOut" xml:space="preserve">
+     <value>U bent succesvol uitgelogd!</value>
+    </data>
+     <data name="OfflineMessage" xml:space="preserve">
+     <value>Je bent offline. Inloggen is niet mogelijk. Controleer je internetverbinding en probeer het opnieuw.</value>
+    </data>
+    <data name="MicrosoftLogin" xml:space="preserve">
+        <value>Microsoft Login</value>
+    </data>
+</root>

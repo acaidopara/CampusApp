@@ -1,0 +1,8 @@
+<div class=@("select-container " + Css)>
+    <MudSelect T="string?" Value="@Value" ValueChanged="OnValueChanged" Placeholder="@Placeholder" Class="@("selectfield " + Css)">
+        @foreach (var item in Items)
+        {
+            <MudSelectItem Value="@item">@item</MudSelectItem>
+        }
+    </MudSelect>
+</div>

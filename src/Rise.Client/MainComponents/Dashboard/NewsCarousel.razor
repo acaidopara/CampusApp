@@ -1,0 +1,64 @@
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture    
+@using Rise.Client.Resources.MainComponents.Dashboard
+@inject IConfiguration Config
+
+@inject IStringLocalizer<Dashboard> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div>
+    <MudCarousel Class="mud-width-full event-carousel"
+                 TData="object"
+                 ShowArrows="false"
+                 ShowBullets="@ShowIndicators"
+                 SelectedIndex="0">
+
+        <BulletTemplate Context="selected">
+            <div class="carousel-bullet @(selected ? "selected" : "")"></div>
+        </BulletTemplate>
+
+        <ChildContent>
+            @if (News is not null)
+            {
+                @foreach (var article in News)
+                {
+                    <MudCarouselItem Class="event-carousel-item" Transition="Transition.Slide">
+                        <a href="/nieuws-en-events/nieuws/@article.Id" class="carousel-item-link">
+                            <div class="carousel-item-content" style="background-image: url('@($"{Config["ImageBasePath"]}/{@article.ImageUrl}")');">
+                                <div class="gradient-overlay"></div>
+                                <div class="carousel-text">
+                                    <h3>@article.Title</h3>
+                                    <span class="read-more">
+                                        @Loc["ReadMore"]
+                                        <MudIcon Icon="@Icons.Material.Outlined.ArrowRightAlt" Title="@Loc["Arrow"]"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </MudCarouselItem>
+                }
+            }
+
+            @if (Events is not null)
+            {
+                @foreach (var article in Events)
+                {
+                    <MudCarouselItem Class="event-carousel-item" Transition="Transition.Slide">
+                        <a href="/nieuws-en-events/events/@article.Id" class="carousel-item-link">
+                            <div class="carousel-item-content" style="background-image: url('@($"{Config["ImageBasePath"]}/{@article.ImageUrl}")');">
+                                <div class="gradient-overlay"></div>
+                                <div class="carousel-text">
+                                    <div class="event-item">
+                                        <DateBlock EventDate="article.Date.Date" MonthFormat="MMM" />
+                                        <h3>@article.Title</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </MudCarouselItem>
+                }
+            }
+        </ChildContent>
+    </MudCarousel>
+</div>

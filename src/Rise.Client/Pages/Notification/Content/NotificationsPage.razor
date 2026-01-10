@@ -1,0 +1,71 @@
+﻿@page "/notificaties"
+@attribute [Authorize]
+@using Rise.Client.Pages.Notification.Components
+@using Rise.Client.MainComponents.Filtering
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.MainComponents.Common
+@inherits NotificationsBase
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<PageTitle>@Loc["TitleNotifications"]</PageTitle>
+
+@if (_isLoading)
+{
+    <Loader/>
+}
+else
+{
+    <div class="mx-8 mx-lg-10 mb-10 mt-5">
+        <MudGrid Class="mx-auto" Spacing="0">
+            <MudItem xs="12" Class="mx-lg-10">
+                <TopPage BackLinkUrl="" Title="@Loc["TitleNotifications"].Value" Subtitle="@($"{UnreadCount} {(UnreadCount ==1?Loc["unreadMessage"]:Loc["unreadMessages"])}")"/>
+                <div class="filter-section">
+                    <Filtering Items="@Filters"
+                               SelectedItem="@SelectedFilter"
+                               SelectedItemChanged="@OnFilterChanged"
+                               SearchTermChanged="@OnSearchTermChanged"
+                               UnreadCount="UnreadCount"
+                               Placeholder="@Loc["SearchNotification"].Value" />
+                </div>
+                <div class="mt-5">
+                    @if (!Notifications.Any())
+                    {
+                        if (SelectedFilter == "Unread" || SelectedFilter == "Ongelezen")
+                        {
+                            <div class="empty">@Loc["AllRead"]</div>
+                        }
+                        else
+                        {
+                            <div class="empty">@Loc["EmptyNotifications"]</div>
+                        }
+                    }
+                    else
+                    {
+                        @foreach (var n in Notifications)
+                        {
+                            <NotificatieArticle @key="@n.Id"
+                                Notification= "@n"
+                                OnToggleRead="@HandleToggleRead"
+                                OnDelete="@OnArticleDelete"
+                                Tab="@SelectedFilter" />
+                        }
+
+                        @if (_pageCount > 1)
+                        {
+                            <div class="d-flex justify-center mt-2 pt-5 pb-10">
+                                <MudPagination Color="Color.Primary"
+                                               Count="@_pageCount"
+                                               Selected="@SelectedPage"
+                                               SelectedChanged="@OnPageChanged"
+                                               BoundaryCount="1"
+                                               MiddleCount="1"
+                                               Variant="Variant.Text" />
+                            </div>
+                        }
+                    }
+                </div>
+            </MudItem>
+        </MudGrid>
+    </div>
+}

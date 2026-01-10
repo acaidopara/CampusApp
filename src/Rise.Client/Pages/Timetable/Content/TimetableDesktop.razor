@@ -1,0 +1,109 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Pages.Timetable.Components
+@using Rise.Client.MainComponents.Dashboard
+@using Rise.Client.Resources.Pages.Timetable
+@inject IStringLocalizer<Timetable> Loc
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+<div>
+    <div class="rest">
+        @if (!Lessons.Any())
+        {
+            <NoLessons/>
+        }
+        else
+        {
+            <div class="timetable-grid">
+                <div class="grid-header">
+                    <div class="time-column"></div>
+                    @foreach (var day in _weekDays)
+                    {
+                        var isToday = day.Date.Date == DateTime.Today;
+                        <div class="day-header @(isToday ? "today" : "")">
+                            @day.Name
+                        </div>
+                    }
+                </div>
+                @if (_weekDays.Any(d => d.Deadlines.Any()))
+                {
+                    <div class="grid-deadlines">
+                        <div class="time-column"></div>
+                        @foreach (var day in _weekDays)
+                        {
+                            <div class="day-deadline">
+                                @if (day.Deadlines.Any())
+                                {
+                                    @if (day.Deadlines.Count() == 1)
+                                    {
+                                        <AlertSection
+                                            Title="Deadline:"
+                                            Message="@($"{day.Deadlines.First().Title} {Loc["Om"]} {day.Deadlines.First().DueDate:HH:mm}")"
+                                            Severity="Severity.Info"
+                                            Link="/deadlines"/>
+                                    }
+                                    else
+                                    {
+                                        <AlertSection
+                                            Title="Deadlines:"
+                                            Message="@string.Join("<br />", day.Deadlines.Select(d => $"{d.Title} {Loc["Om"]} {d.DueDate:HH:mm}"))"
+                                            Severity="Severity.Info"
+                                            Link="/deadlines"/>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="deadline-empty"></div>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+                <div class="grid-body">
+                    @foreach (var hour in _hours)
+                    {
+                        <div class="hour-row">
+                            <div class="time-label">@hour</div>
+                            @foreach (var day in _weekDays)
+                            {
+                                <div class="day-cell">
+                                    @foreach (var lesson in day.Lessons)
+                                    {
+                                        var startOffset = (lesson.Start.Hour - int.Parse(hour.Split(':')[0])) * 4 + (lesson.Start.Minute / 15);
+                                        var duration = (int)Math.Ceiling((lesson.End - lesson.Start).TotalMinutes / 15);
+                                        if (startOffset >= 0 && startOffset < 4)
+                                        {
+                                            <div class="lesson-container"
+                                                 style=@($"top: calc({startOffset * 25}%); " +
+                                                       $"height: calc({duration * 25}%); " +
+                                                       "position: absolute;")
+                                                 data-lesson-id="@lesson.Id"
+                                                 data-day="@lesson.Start.DayOfWeek">
+
+                                                <CourseItem Course="lesson"
+                                                            OnCourseSelected="ShowCourseDetails"
+                                                            DisplayType="false"/>
+                                            </div>
+                                        }
+                                    }
+                                    @for (int q = 0; q < 4; q++)
+                                    {
+                                        <div class="quarter"></div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+   
+    @if (_selectedCourse is not null)
+    {
+        <div class="overlay" @onclick="CloseDetails">
+            <div class="overlay-content" @onclick:stopPropagation>
+                <CourseDetails Course="_selectedCourse" OnClose="CloseDetails" />
+            </div>
+        </div>
+    }
+</div>

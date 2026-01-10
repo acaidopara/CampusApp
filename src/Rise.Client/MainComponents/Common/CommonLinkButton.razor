@@ -1,0 +1,13 @@
+@using Blazor.WebAssembly.DynamicCulture
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+<a class="common-link-button"
+   href="@Href"
+   target="@Target"
+   rel="@Rel">
+    @if (!string.IsNullOrEmpty(Icon))
+    {
+        <MudIcon Icon="@Icon" />
+    }
+    @Text
+</a>

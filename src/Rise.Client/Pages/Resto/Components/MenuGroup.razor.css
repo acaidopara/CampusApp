@@ -1,0 +1,21 @@
+.menu-container:first-of-type {
+    padding-top: 30px;
+}
+
+.menu-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 1rem;
+    padding: 10px;
+}
+
+.menu-group-header {
+    grid-column: 1 / 2;
+    font-weight: bold;
+    padding: 4px 0;
+}
+
+.menu-group-info {
+    grid-column: 2 / 3;
+}

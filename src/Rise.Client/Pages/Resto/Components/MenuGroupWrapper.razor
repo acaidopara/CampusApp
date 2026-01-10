@@ -1,0 +1,26 @@
+@using Rise.Shared.Resto
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Resto
+
+@inject IStringLocalizer<Resto> Loc
+
+@if (Entries != null && Entries.Any(e => !string.IsNullOrWhiteSpace(e.Description)))
+{
+    <div class="menu-group-wrapper">
+        @foreach (var group in Entries
+                      .Where(e => !string.IsNullOrWhiteSpace(e.Description))
+                      .GroupBy(e => e.FoodCategory))
+        {
+            <MenuGroup GroupName="@translateFoodType(group.Key)" Entries="@group" />
+        }
+    </div>
+}
+else
+{
+    <p>@Loc["NoMenuFor", GroupName]</p>
+}    
+
+@code {
+    [Parameter] public string GroupName { get; set; } = string.Empty;
+    [Parameter] public IEnumerable<MenuItemDto>? Entries { get; set; }
+}

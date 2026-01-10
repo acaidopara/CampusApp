@@ -1,0 +1,30 @@
+@using System.Globalization
+@using System.Text.RegularExpressions
+@using Rise.Shared.Events
+<div class="infocard">
+    @if (Date is not null)
+    {
+        <div class="infocard-row">
+            <i class="fa-regular fa-calendar"></i>
+            <p>@Date</p>
+        </div>
+    }
+    
+    @if (Money is not null && HasMoney)
+    {
+        <div class="infocard-row">
+            <i class="fa-regular fa-money-bill-1"></i>
+            <p>@Money</p>
+        </div>
+    }
+    
+    @if (Location is not null)
+    {
+        <div class="infocard-row">
+            <div class="icon-circle">
+                <i class="fa-regular fa-compass"></i>
+            </div>
+            <p>@GetLocationText()</p>
+        </div>
+    }
+</div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HOGENT campus app</title>
+    <base href="/" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/override.css" />
+    <script src="js/network.js"></script>
+    <link href="manifest.webmanifest" rel="manifest" />
+    <link rel="icon" type="image/png" href="logo-icon.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="Images/hogent-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="Images/hogent-192.png" />
+
+    <!-- Font-awesome import, for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-MV+4hYQ43fZn5s7MfKZ0Eq1FF3j5pJq2F7TgD5ZPj1MZ1sw6NjU5eCmI3drMZP9rxNRh4f7H7T4e5uO5uv+Kg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- MudBlazor (component library) import -->
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+
+    <link href="Rise.Client.styles.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="loading-container">
+        <div class="logo-wrapper">
+          <img src="images/logo-icon.png" class="loading-logo" />
+          <div class="progress-bar"></div>
+          <div class="progress-text"></div>
+        </div>
+      </div>
+    </div>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+<script src="push.js"></script>
+<script>
+    navigator.serviceWorker.register('service-worker.published.js', {updateViaCache: 'none'});
+</script>
+<script src="_framework/blazor.webassembly.js"></script>
+<script src="_content/MudBlazor/MudBlazor.min.js"></script>
+<script src="_content/BlazorPanzoom/panzoom.min.js"></script>
+<script src="_content/BlazorPanzoom/blazorpanzoom.js"></script>
+<script src="ColourChange.js?v=1"></script>
+</body>
+
+</html>

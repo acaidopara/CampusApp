@@ -1,0 +1,18 @@
+@page "/logout"
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+@inject IStringLocalizer<Resources.Identity.Login> Loc
+
+<PageTitle>Logout</PageTitle>
+
+<AuthorizeView>
+    <Authorized>
+        <div class="alert alert-info">Logging you out...</div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="alert alert-success">You're logged out. <a href="/login">Log in.</a></div>
+    </NotAuthorized>
+</AuthorizeView>

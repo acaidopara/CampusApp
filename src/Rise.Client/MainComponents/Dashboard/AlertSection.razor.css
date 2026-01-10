@@ -1,0 +1,51 @@
+.alert-section.hidden-padding {
+    padding: 30px 0 0;
+}
+
+.alert-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.alert-wrapper {
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 500px) {
+    .close-btn {
+        top: 5px;
+    }
+}
+
+@media (max-width: 1279px) {
+    .alert-section.hidden-margin {
+        margin: 30px 0;
+    }
+}
+
+.alert-wrapper .alert-message {
+  display: block;
+  box-sizing: border-box;
+  width: calc(100% - 18px);
+  max-width: calc(100% - 18px);
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.alert-wrapper .alert-message.centered {
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,14 @@
+<div class="day-item @(IsActive ? "active" : "")" @onclick="SelectDay" data-testid="day-@Day">
+    <p>@Day</p>
+</div>
+
+@code {
+    [Parameter] public string Day { get; set; } = string.Empty;
+    [Parameter] public bool IsActive { get; set; }
+    [Parameter] public EventCallback<string> OnSelected { get; set; }
+
+    private async Task SelectDay()
+    {
+        await OnSelected.InvokeAsync(Day);
+    }
+}

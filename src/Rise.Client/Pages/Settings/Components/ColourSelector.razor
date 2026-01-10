@@ -1,0 +1,32 @@
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Settings
+@using Rise.Shared.Student
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.MainComponents.Common
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject ISnackbar Snackbar
+@inject IJSRuntime Js
+@inject IStringLocalizer<Settings> Loc
+@inject IStudentService StudentService
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div>
+    <h3>@Loc["DetailKleur"]</h3>
+    <div class="d-flex gap-2 position-relative">
+        @foreach (var colour in _colourOptions)
+        {
+            <ColourItem 
+                Colour="@colour" 
+                IsSelected="colour == _selectedColour"
+                OnSelected="OnColourChange"
+            />
+        }
+
+        @if (_isSavingColour)
+        {
+            <Loader/>
+        }
+    </div>
+</div>

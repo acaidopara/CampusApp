@@ -1,0 +1,43 @@
+@inject IJSRuntime Js
+@inject IHttpClientFactory HttpClientFactory
+@page "/push-notifications"
+
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SendTestNotification">
+    Send Test Notification
+</MudButton>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                var subscription = await Js.InvokeAsync<object>(
+                    "subscribeToPush",
+                    "BGfWpseddal65930sdg9Hi44wqz7-cqNksDX_HhUTOaAU9hYjdCRH92ES0EOyR6po1jXD4L0XPwKppTj3164Ry4"
+                );
+
+                var httpClient = HttpClientFactory.CreateClient("SecureApi");
+                await httpClient.PostAsJsonAsync("/api/notifications/subscribe", subscription);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Push subscription failed: {ex.Message}");
+            }
+        }
+    }
+
+    private async Task SendTestNotification()
+    {
+        try
+        {
+            var httpClient = HttpClientFactory.CreateClient("SecureApi");
+            await httpClient.PostAsync("/api/notifications/test", null);
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Failed to send test notification: {ex.Message}");
+        }
+    }
+}

@@ -1,0 +1,20 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Resources.Pages.Resto
+@inject IStringLocalizer<Resto> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+<div class="diet-info">
+    <span class="diet-item">
+        <MudIcon Icon="@Icons.Material.Filled.ExpandMore" Size="Size.Small" Style="color: #A5CA72;" />
+        <p>@Loc["VeggieHalal"]</p>
+    </span>
+    <span class="diet-item circle-check">
+        <VeganIcon />
+        <p>@Loc["VeganHalal"]</p>
+    </span>
+    <span class="diet-item full-width">
+        <MudIcon Icon="@Icons.Material.Filled.Info" Size="Size.Small" Class="info-icon" />
+        <p>@Loc["AllergensInfo"]</p>
+    </span>
+</div>

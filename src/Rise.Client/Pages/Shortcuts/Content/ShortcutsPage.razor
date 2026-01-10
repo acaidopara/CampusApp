@@ -1,0 +1,99 @@
+@page "/snelkoppelingen"
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.Pages.Shortcuts.Components
+@inherits SnelkoppelingenBase
+
+<PageTitle>@Loc["MijnSnelkoppelingen"]</PageTitle>
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+@if (_isLoading)
+{
+    <Loader></Loader>
+}
+else
+{
+    <div class="quicklinks-section">
+        <div class="quicklinks-header">
+            @if (!IsManageMode)
+            {
+                <a href="" class="back-link">
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowRightAlt" Title="Back" />
+                </a>
+            }
+            <h3>@Loc["MijnSnelkoppelingen"]</h3>
+            <AuthorizeView>
+                <Authorized>
+                    <div class="quicklinks-buttons">
+                        <button @onclick="ToggleManageMode" class="quicklinks-edit-button">
+                            <MudIcon Icon="@(IsManageMode ? Icons.Material.Rounded.Close : Icons.Material.Rounded.Edit)" Size="Size.Small"/>
+                        </button>
+
+                        @if (IsManageMode)
+                        {
+                            <button @onclick="SaveShortcuts" class="quicklinks-save-button">
+                                @Loc["Opslaan"]
+                            </button>
+                        }
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    <div style="width: 30px"></div>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+        <div class="quicklinks-grid">
+            @if (Quicklinks.Any())
+            {
+                @foreach (var (link, index) in Quicklinks.Select((value, i) => (value, i)))
+                {
+                    if (IsManageMode)
+                    {
+                        <QuicklinkManageItem Title="@link.Title"
+                                             Icon="@link.Icon"
+                                             Label="@link.Label"
+                                             Index="@index"
+                                             Colour="@link.Colour"
+                                             OnMoveLeft="@HandleMoveLeft"
+                                             OnMoveRight="@HandleMoveRight"
+                                             OnRemove="@(() => RemoveShortcut(link.Id))"
+                                             OnColourChanged="@((c) => ColorList(link.Id, c))"/>
+                    }
+                    else
+                    {
+                        <QuicklinkItem Title="@link.Title"
+                                       Icon="@link.Icon"
+                                       Label="@link.Label"
+                                       LinkUrl="@link.LinkUrl"
+                                       Colour="@link.Colour"/>
+                    }
+                }
+            }
+            else
+            {
+                <p class="geen-snelkoppelingen">@Loc["GeenSnelkoppelingen"]</p>
+            }
+        </div>
+        <div class="all-shortcuts">
+            <MudExpansionPanels MultiExpansion="false">
+                @foreach (var group in QuicklinkSections)
+                {
+                    <MudExpansionPanel Text="@GetShortcutTypeName(group.Key)">
+                        <div class="all-quicklinks-grid">
+                            @foreach (var (link, index) in group.Select((value, i) => (value, i)))
+                            {
+                                <QuicklinkItem Title="@link.Title"
+                                               Icon="@link.Icon"
+                                               Label="@link.Label"
+                                               LinkUrl="@link.LinkUrl"
+                                               Colour="@DefaultColour"
+                                               OnClick="@(() => AddShortcut(link.Id))"/>
+                            }
+                        </div>
+                    </MudExpansionPanel>
+                }
+            </MudExpansionPanels>
+        </div>
+    </div>
+}

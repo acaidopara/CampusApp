@@ -1,0 +1,43 @@
+﻿@inject NavigationManager Nav
+@inherits LayoutComponentBase
+@inject NetworkState networkState
+@using Microsoft.Extensions.Localization
+@using Rise.Client.Api
+@using Rise.Client.MainComponents.Dashboard
+@using Blazor.WebAssembly.DynamicCulture
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+@inject IStringLocalizer<Resources.Layout.MainLayout> Loc
+
+<div>
+    @* MudBlazor components *@
+    @* Required *@
+    <MudThemeProvider Theme="_myCustomTheme" />
+    <MudPopoverProvider />
+
+    @* Needed for dialogs *@
+    <MudDialogProvider />
+
+    @* Needed for snackbars *@
+    <MudSnackbarProvider />
+
+    <NavBar ShowTopNav="_showTopNav" />
+    <main class="@(_showTopNav ? "main-with-nav" : "main-no-nav")">
+        <section class="section">
+            @if (!networkState.IsOnline)
+            {
+                <div class="offline-alert">
+                    <AlertSection Title="@Loc["OflineTitle"].Value" Message="@Loc["OflineMessage"].Value"
+                        Severity="Severity.Warning" ShowCloseButton="false" isOflineMessage="true"/>
+                </div>
+            }
+            @Body
+        </section>
+    </main>
+    @if (_showBottomNav)
+    {
+        <BottomNav />
+    }
+
+    <Footer></Footer>
+</div>

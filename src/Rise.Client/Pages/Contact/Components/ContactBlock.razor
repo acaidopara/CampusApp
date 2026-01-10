@@ -1,0 +1,24 @@
+<div class="contact-card">
+    <p>
+        @Firstname @Lastname
+    </p>
+
+    @if (!string.IsNullOrWhiteSpace(Title))
+    {
+        <p>@Title</p>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Email))
+    {
+        <p>
+            <a href="mailto:@Email">@Email</a>
+        </p>
+    }
+</div>
+
+@code {
+    [Parameter] public string? Firstname { get; set; }
+    [Parameter] public string? Lastname { get; set; }
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public string? Email { get; set; }
+}

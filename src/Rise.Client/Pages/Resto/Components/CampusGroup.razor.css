@@ -1,0 +1,59 @@
+.campus-group {
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.3s ease-in-out, opacity 0.5s ease-out;
+}
+
+.menu-top{
+    margin-bottom: 2em;
+}
+.menu-group .Menu-description{
+    margin-bottom: 1em;
+}
+.resto-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 8px;
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+.campus-group p {
+    margin: 0;
+}
+
+.icon i {
+    vertical-align: middle;
+}
+
+.campus-group.expanded .menu-group {
+    max-height: none;
+    padding-top: 20px;
+}
+
+.menu-group {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+.campus-group.expanded {
+    border-color: var(--secondary-color);
+}
+
+.campus-group.completing {
+    opacity: 0;
+}
+
+.campus-group .resto-head .icon i {
+  display: inline-block; 
+  transition: transform 0.18s ease;
+  transform-origin: center;
+}
+
+.campus-group.expanded .resto-head .icon i {
+  transform: rotate(180deg);
+}

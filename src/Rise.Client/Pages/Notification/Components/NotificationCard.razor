@@ -1,0 +1,35 @@
+﻿@page "/notificaties/notificatie/{NotificationId:int}"
+@using Microsoft.Extensions.Localization
+@using Rise.Shared.Notifications
+@using MudBlazor
+@using Rise.Client.MainComponents.Common
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Authorization
+@inject INotificationService NotificationService
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthProvider
+@inject IStringLocalizer<Resources.Pages.Notifications.Notifications> Loc
+
+@if (_notification is null)
+{
+    <Loader ShowBackButton="true" Text="@Loc["NotificationLoading"]" />
+}
+else
+{
+    <div class="notification-card">
+        <div class="notification-card-header">
+            <div class="notification-card-header-content">
+                <MudIconButton Class="back-btn"
+                               Icon="@Icons.Material.Filled.ArrowRightAlt"
+                               OnClick="@(() => NavigationManager.NavigateTo($"/notificaties{(string.IsNullOrEmpty(Tab) ? "" : $"?tab={System.Uri.EscapeDataString(Tab)}")}"))"
+                               title="Terug" />
+                <p class="notification-card-date">@_notification.CreatedAt.ToString("dd/MM/yyyy HH:mm")</p>
+                <h4 class="notification-card-title"> <a href="@_notification.LinkUrl" style="color: white">@_notification.Title</a></h4>
+            </div>
+        </div>
+
+        <div class="notification-card-body">
+            <p class="notification-card-message">@((MarkupString)_notification.Message)</p>
+        </div>
+    </div>
+}

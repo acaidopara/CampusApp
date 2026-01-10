@@ -1,0 +1,39 @@
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.Resources.MainComponents.Navigation
+@inject IStringLocalizer<Navigation> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div>
+    <MudMenu
+        Icon="@Icons.Material.Filled.Menu"
+        Color="Color.Inherit"
+        Dense="true"
+        elevation="0"
+        Style="background-color: #000000; color: white; border-radius: 0; padding: 0">
+        
+        <MudMenuItem Href="instellingen" Style="background-color: #000000; color:white; padding: 8px 16px;">@Loc["AppSettings"]</MudMenuItem>
+        <MudMenuItem Href="it-support" Style="background-color: #000000; color:white; padding: 8px 16px;">@Loc["ITSupport"]</MudMenuItem>
+        <MudMenuItem Href="contact" Style="background-color: #000000; color:white; padding: 8px 16px;">@Loc["ContactAndHelp"]</MudMenuItem>
+        <MudMenuItem Href="snelkoppelingen" Style="background-color: #000000; color:white; padding: 8px 16px;">@Loc["Snelkoppelingen"]</MudMenuItem>
+
+        <MudDivider Style="margin: 0; background-color: #000; color:white;"/>
+
+        <MudMenuItem Style="color:white; background-color: #000000; padding: 8px 16px;"><LanguageButton /></MudMenuItem>
+
+        <MudDivider Style="color:white; margin: 0; background-color: #000;"/>
+
+        <AuthorizeView>
+            <Authorized>
+                <MudText Style="color:white; background-color: #000000; padding: 0 16px; font-weight: 500;">
+                    @context.User.Identity?.Name
+                </MudText>
+                <MudMenuItem Href="logout" Style="color:white; background-color: #000000; padding: 8px 16px;">@Loc["Logout"]</MudMenuItem>
+            </Authorized>
+            <NotAuthorized>
+                <MudMenuItem Href="login" Style="color:white; background-color: #000000; padding: 8px 16px;">@Loc["Login"]</MudMenuItem>
+            </NotAuthorized>
+        </AuthorizeView>
+    </MudMenu>
+</div>

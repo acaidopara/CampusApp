@@ -1,0 +1,15 @@
+.eventcards-section {
+    margin: 15px 30px 30px;
+}
+
+.filter-section {
+    position: sticky;
+    top: 127px;
+    z-index: 100;
+    background-color: white;
+    padding: 10px 30px 10px;
+}
+
+::deep .mud-pagination-item-selected .mud-button-filled {
+    box-shadow: none !important;
+}

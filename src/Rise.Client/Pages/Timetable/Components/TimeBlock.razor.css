@@ -1,0 +1,22 @@
+.class-schedule-time {
+    padding: 15px 35px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    flex-grow: 1;
+}
+
+.class-schedule-time p {
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    word-break: normal;
+    hyphens: none;
+}
+
+.class-schedule-time .stripe {
+    color: var(--secondary-color);
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Oops" xml:space="preserve">
+        <value>Oops!</value>
+    </data>
+    <data name="NoClubsFound" xml:space="preserve">
+        <value>No clubs found.</value>
+    </data>
+    <data name="JobLoading" xml:space="preserve">
+        <value>Job is loading...</value>
+    </data>
+    <data name="NoJobsFound" xml:space="preserve">
+        <value>No vacancies found.</value>
+    </data>
+    <data name="website" xml:space="preserve">
+        <value>To website</value>
+    </data>
+    <data name="mail" xml:space="preserve">
+        <value>Send email</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>Description</value>
+    </data>
+    <data name="NoDealsFound" xml:space="preserve">
+        <value>No deals found.</value>
+    </data>
+    <data name="DealLoading" xml:space="preserve">
+        <value>Deal is loading...</value>
+    </data>
+    <data name="Discount" xml:space="preserve">
+        <value>Claim discountcode</value>
+    </data>
+    <data name="CopyLink" xml:space="preserve">
+        <value>Copy link</value>
+    </data>
+    <data name="LinkCopied" xml:space="preserve">
+        <value>Link copied to clipboard!</value>
+    </data>
+    <data name="ReadLess" xml:space="preserve">
+        <value>Read less</value>
+    </data>
+    <data name="ReadMore" xml:space="preserve">
+        <value>Read more</value>
+    </data>
+    <data name="Eten" xml:space="preserve">
+        <value>Food</value>
+    </data>
+    <data name="SearchDeal" xml:space="preserve">
+        <value>Search deal...</value>
+    </data>
+    <data name="SearchJob" xml:space="preserve">
+        <value>Search job...</value>
+    </data>
+    <data name="SearchClub" xml:space="preserve">
+        <value>Search student club...</value>
+    </data>
+    <data name="CodeCopied" xml:space="preserve">
+        <value>Discount code copied to clipboard!</value>
+    </data>
+</root>

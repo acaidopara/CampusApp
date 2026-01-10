@@ -1,0 +1,13 @@
+::deep .white-check {
+    color: white;
+}
+
+.icon-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #A5CA72;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}

@@ -1,0 +1,17 @@
+<MudExpansionPanel Text="@Panel.Name">
+    <div class="all-quicklinks-grid">
+        @foreach (var link in Panel.Links)
+        {
+            <QuicklinkItem Title="@link.Title"
+                           Icon="@link.Icon"
+                           Label="@link.Label"
+                           Colour="@link.Color"
+                           LinkUrl="@link.LinkUrl" />
+        }
+    </div>
+</MudExpansionPanel>
+
+@code {
+    [Parameter]
+    public QuicklinksAccordion.QuickLinkSection Panel { get; set; } = null!;
+}

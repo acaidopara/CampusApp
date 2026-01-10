@@ -1,0 +1,15 @@
+<div class="sort-toggle">
+    <button @onclick="ToggleSort" title="@GetSortTitle()">
+        <span>@GetSortLabel()</span>
+        <span class="icon">
+            @if (SortOption == "Ascending")
+            {
+                <i class="fas fa-arrow-up"></i>
+            }
+            else
+            {
+                <i class="fas fa-arrow-down"></i>
+            }
+        </span>
+    </button>
+</div>

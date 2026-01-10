@@ -1,0 +1,24 @@
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Resources.MainComponents.Filtering.Filter> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+<div>
+    <MudChip Class="mx-1 filter-chip"
+             Variant="Variant.Outlined"
+             T="string">
+        <span class="flex items-center">
+            @if (!string.IsNullOrEmpty(Icon))
+            {
+                <i class="@Icon pr-1 chip-icon"></i>
+            }
+            <span>@Loc[Label]</span>
+        </span>
+    </MudChip>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public string Label { get; set; } = string.Empty;
+    [Parameter] public string? Icon { get; set; }
+}

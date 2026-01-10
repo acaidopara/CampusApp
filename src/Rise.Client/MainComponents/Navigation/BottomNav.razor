@@ -1,0 +1,44 @@
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.Resources.MainComponents.Navigation
+@inherits NavBase
+@inject IStringLocalizer<Navigation> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div>
+    <MudHidden Breakpoint="Breakpoint.LgAndUp">
+        <MudPaper Class="mud-width-full bottom-nav-paper" Elevation="8">
+            <MudGrid Spacing="0" Justify="Justify.SpaceEvenly" Class="bottom-nav-grid d-flex align-items-center">
+                @foreach (var item in _navItems)
+                {
+                    var isProtected = item.Href is "deadlines" or "lessenrooster";
+                    var isDisabled = isProtected && !IsAuthenticated;
+                    var normalizedItemHref = item.Href.TrimStart('/');
+                    var normalizedActiveHref = ActiveHref.TrimStart('/');
+
+                    var isActive = string.IsNullOrEmpty(normalizedItemHref)
+                        ? string.IsNullOrEmpty(normalizedActiveHref)
+                        : normalizedActiveHref.StartsWith(normalizedItemHref, StringComparison.OrdinalIgnoreCase);
+
+                    var color = isActive && !isDisabled ? "white" : "#b0b0b0";
+                    var style = $"color: {color};";
+                    if (isDisabled)
+                    {
+                        style += " opacity: 0.5; cursor: not-allowed;";
+                    }
+
+                    <MudItem xs="2" Class="text-center bottom-nav-item">
+                        <MudNavLink Href="@null"
+                                    OnClick="@(() => ProtectedNav.NavigateTo(item.Href, item.Label))"
+                                    Class="bottom-nav-link"
+                                    Style="@style">
+                            <MudIcon Icon="@( (isActive && !isDisabled) ? item.IconFilled : item.IconOutlined )" />
+                            <div>@Loc[item.Label]</div>
+                        </MudNavLink>
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudPaper>
+    </MudHidden>
+</div>

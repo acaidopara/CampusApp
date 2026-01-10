@@ -1,0 +1,55 @@
+.event-content {
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    width: 100%;
+}
+
+.event-card {
+    height: 230px;
+    min-width: 90%;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-size: cover;
+    background-position: center;
+}
+
+.event-info {
+    padding-left: 25px;
+}
+
+.event-info h3 {
+    color: white;
+    font-weight: 800;
+}
+
+.event-info a {
+    color: white;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.event-gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0.4) 30%,
+            rgba(0, 0, 0, 0) 100%
+    );
+    pointer-events: none;
+}
+
+@media (min-width: 1280px) {
+    .event-card {
+        min-width: 30%;
+    }
+}

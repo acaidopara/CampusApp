@@ -1,0 +1,10 @@
+.day-item {
+    cursor: pointer;
+    padding: 10px 18px;
+}
+
+.day-item.active {
+    border-bottom: 3px solid var(--secondary-color);
+    color: black;
+    font-weight: bold;
+}

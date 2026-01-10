@@ -1,0 +1,23 @@
+.announcement-block {
+/*    margin: 15px 15px;*/
+}
+
+.announcement-block p:first-of-type {
+    color: #BDBDC1;
+}
+
+.announcement-block a {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    text-decoration: none;
+/*    padding-top: 15px;*/
+}
+
+@media (min-width: 1280px) {
+
+    .announcement-block {
+        background-color: white;
+        padding: 30px;
+    }
+}

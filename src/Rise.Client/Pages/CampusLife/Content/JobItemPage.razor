@@ -1,0 +1,71 @@
+@page "/vacatures/{JobId:int}"
+@using System.Globalization
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.Pages.Campus.Components
+@using Rise.Client.Pages.CampusLife.Components
+@using Rise.Client.Resources.Pages.CampusLife
+
+@inject IStringLocalizer<CampusLife> Loc
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+<div>
+    @if (_job is null)
+    {
+        <Loader ShowBackButton="true" Text="@Loc["JobLoading"]" />
+    }
+    else
+    {
+        <div class="event-article-page">
+            <div>
+                <JobItemHeader Item="_job" Page="vacatures" />
+            </div>
+            <div class="info-section">
+                <div class="article-sidebar">
+                    <InfoCard Money="@($"€ {_job.Salary.ToString("N2", CultureInfo.CurrentCulture)} / uur")"
+                        Location="@_job.Address" />
+                    <MudHidden Breakpoint="Breakpoint.MdAndDown">
+                        <div class="mt-10 buttonset">
+                            @if (!string.IsNullOrWhiteSpace(_job.WebsiteUrl))
+                            {
+                                <div class="mb-3">
+                                    <CommonLinkButton Text="@Loc["website"].Value" Href="@_job.WebsiteUrl" />
+                                </div>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(_job.EmailAddress))
+                            {
+                                <div class="mb-7 secondButton">
+                                    <CommonLinkButton Text="@Loc["mail"].Value" Href=@($"mailto:{_job.EmailAddress}") />
+                                </div>
+                            }
+                        </div>
+                    </MudHidden>
+                </div>
+                <div class="article-content">
+                    <AboutSection Title="@Loc["Description"].Value" Description="@_job.Description"
+                        ReadMoreText="@Loc["ReadMore"].Value" ReadLessText="@Loc["ReadLess"].Value" MaxLength="100" />
+
+                    <MudHidden Breakpoint="Breakpoint.LgAndUp">
+                        <div class="mt-10 buttonset">
+                            @if (!string.IsNullOrWhiteSpace(_job.WebsiteUrl))
+                            {
+                                <div class="mb-3">
+                                    <CommonLinkButton Text="@Loc["website"].Value" Href="@_job.WebsiteUrl" />
+                                </div>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(_job.EmailAddress))
+                            {
+                                <div class="mb-7 secondButton">
+                                    <CommonLinkButton Text="@Loc["mail"].Value" Href=@($"mailto:{_job.EmailAddress}") />
+                                </div>
+                            }
+                        </div>
+                    </MudHidden>
+                </div>
+                <ScrollToTop />
+            </div>
+        </div>
+    }
+</div>

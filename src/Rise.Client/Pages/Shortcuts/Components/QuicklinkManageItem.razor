@@ -1,0 +1,56 @@
+<div class="quicklink-wrapper">
+    <div class="quicklink-item">
+        <button class="remove-btn"
+                @onclick="RemoveQuicklink"
+                @onclick:stopPropagation="true"
+                @onclick:preventDefault="true">
+            &#10006;
+        </button>
+
+        <div class="quicklink-icon">
+            @if (!string.IsNullOrEmpty(Icon))
+            {
+                <i class="@Icon" title="@Title" style="color:@_currentColour"></i>
+            }
+            else
+            {
+                <span style="color:@_currentColour">@Label</span>
+            }
+        </div>
+
+        <p class="titel">@Title</p>
+        
+        <div class="reorder-buttons">
+            <button class="reorder-btn left" @onclick="() => MoveLeft(Index)">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            
+            <button class="colour-toggle-btn"
+                    @onclick="ToggleColourSelector"
+                    title="Choose colour"
+                    @onclick:stopPropagation="true">
+                <i class="fa-solid fa-paintbrush"></i>
+            </button>
+
+            <button class="reorder-btn right" @onclick="() => MoveRight(Index)">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+        
+        @if (_showColourSelector)
+        {
+            <div class="colour-selector" title="Choose colour">
+                @foreach (var c in _colorOptions)
+                {
+                    <button class="colour-swatch @(c == _currentColour ? "selected" : "")"
+                            style="--swatch-color:@c"
+                            @onclick="() => SetColour(c)"
+                            @onclick:stopPropagation="true"
+                            aria-label="Select colour @c"
+                            title="@c">
+                    </button>
+                }
+            </div>
+        }
+    </div>
+</div>

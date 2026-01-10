@@ -1,0 +1,17 @@
+<MudExpansionPanels MultiExpansion="false">
+    @if (Sections is { Count: > 0 })
+    {
+        @foreach (var group in Sections)
+        {
+            <QuicklinkPanel Panel="group" />
+        }
+    }
+</MudExpansionPanels>
+
+@code {
+    public record QuickLink(string Title, string? Icon, string? Label, string? Color, string LinkUrl);
+    public record QuickLinkSection(string Name, List<QuickLink> Links);
+
+    [Parameter]
+    public List<QuickLinkSection> Sections { get; set; } = new();
+}

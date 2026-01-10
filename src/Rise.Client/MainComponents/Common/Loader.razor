@@ -1,0 +1,32 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Resources.Layout.Loading.Loading> Loc
+
+
+<div class="loader-overlay">
+    @if (ShowBackButton)
+    {
+        <div class="back-button">
+            <MudIconButton Icon="@Icons.Material.Filled.ArrowRightAlt" OnClick="@(() => GoBack())" />
+        </div>
+
+    }
+    <div class="loader-spinner"></div>
+    <div>@(string.IsNullOrEmpty(Text) ? Loc["Title"] : Text)</div>
+</div>
+
+@code {
+
+
+    [Parameter]
+    public bool ShowBackButton { get; set; } = false;
+    [Parameter]
+    public string Text { get; set; } = "";
+
+    [Inject]
+    private IJSRuntime JS { get; set; } = default!;
+
+    private void GoBack()
+    {
+        JS.InvokeVoidAsync("history.back");
+    }
+}

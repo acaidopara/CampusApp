@@ -1,0 +1,51 @@
+@page "/deadlines"
+@using Rise.Client.Pages.Deadlines.Components
+@using Rise.Shared.Deadlines
+
+@using Blazor.WebAssembly.DynamicCulture
+@using Microsoft.Extensions.Localization
+@using Rise.Client.MainComponents.Common
+@using Rise.Client.MainComponents.Filtering
+@using Rise.Client.MainComponents.Sorting
+@using Rise.Client.Resources.Pages.Deadlines
+@inject AuthenticationStateProvider AuthProvider
+@inject IDeadlineService DeadlineService
+@attribute [Authorize(Roles = "Student")]
+@inject IStringLocalizer<Deadline> Loc
+
+<PageTitle>@Loc["Deadlines"]</PageTitle>
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)"/>
+
+@if (_isLoading)
+{
+    <Loader />  
+}
+else
+{
+    <div class="page mx-lg-10">
+        <MudGrid Class="mx-auto" Spacing="0">
+            <MudItem xs="12" Class="mx-lg-10">
+                <TopPage Title="@Loc["Deadlines"].Value" />
+                <div class="field">
+                    <SearchBar SearchTerm="@_searchQuery" SearchTermChanged="OnSearchTermChange" PlaceHolderText="@Loc["SearchPlaceholder"].Value"/>
+                </div>
+                <div class="field filtering-section is-grouped is-grouped-multiline">
+                    <div class="control is-expanded">
+                        <label class="label">@Loc["Course"]</label>
+                        <CourseFilter @bind-SelectedCourse="@_selectedCourse" Courses="@Courses" Label="@Loc["AllCourses"].Value"/>
+                    </div>
+                    <div class="control is-expanded">
+                        <label class="label">@Loc["Sort"]</label>
+                        <SortToggle SortOption="@_sortOption"
+                                    SortOptionChanged="@OnSortTermChange"
+                                    SortOptionTitle1="@Loc["SortDateAsc"].Value"
+                                    SortOptionTitle2="@Loc["SortDateDesc"].Value"/>
+                    </div>
+                </div>
+
+                <OverviewDeadlines UpcomingDeadlines="UpcomingDeadlines" UpdateUi="UpdateUi" IsLoading="_isLoading"/>
+            </MudItem>
+        </MudGrid>
+    </div>
+}

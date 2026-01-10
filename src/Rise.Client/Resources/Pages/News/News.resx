@@ -1,0 +1,57 @@
+<!-- news.resx (Dutch) -->
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="BackToNewsAndEvents" xml:space="preserve">
+        <value>Terug naar nieuws &amp; events</value>
+    </data>
+    <data name="MinuteSingular" xml:space="preserve">
+        <value>minuut</value>
+    </data>
+    <data name="MinutePlural" xml:space="preserve">
+        <value>minuten</value>
+    </data>
+    <data name="ReadingTime" xml:space="preserve">
+        <value>leestijd</value>
+    </data>
+    <data name="CopyLink" xml:space="preserve">
+        <value>Kopieer link</value>
+    </data>
+    <data name="LinkCopied" xml:space="preserve">
+        <value>Link gekopieerd naar klembord!</value>
+    </data>
+    <data name="LatestNews" xml:space="preserve">
+        <value>Laatste nieuws</value>
+    </data>
+    <data name="Oops" xml:space="preserve">
+        <value>Oeps!</value>
+    </data>
+    <data name="NoArticlesFound" xml:space="preserve">
+        <value>Er werden geen artikels gevonden.</value>
+    </data>
+    <data name="ArticleLoading" xml:space="preserve">
+        <value>Artikel wordt geladen...</value>
+    </data>
+    <data name="Title" xml:space="preserve">
+        <value>Nieuws</value>
+    </data>
+    <data name="Events" xml:space="preserve">
+        <value>Evenementen</value>
+    </data>
+    <data name="News" xml:space="preserve">
+        <value>Nieuws</value>
+    </data>
+    <data name="SearchArticle" xml:space="preserve">
+        <value>Zoek een artikel...</value>
+    </data>
+</root>

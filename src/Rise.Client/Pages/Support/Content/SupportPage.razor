@@ -1,0 +1,86 @@
+@using Rise.Client.MainComponents.Common
+@using Rise.Shared.Support
+@using MudBlazor
+@page "/it-support"
+@inject ISupportService SupportService
+@inject IConfiguration Config
+@using Microsoft.Extensions.Localization
+@using Blazor.WebAssembly.DynamicCulture
+@using Rise.Client.Resources.Pages.Support
+
+@inject IStringLocalizer<Support> Loc
+
+<PageTitle>@Loc["ITSupport"]</PageTitle>
+
+<LanguageTrackProvider OnInitializeEvent="provider => provider.RegisterComponent(this)" />
+
+@if (_isLoading)
+{
+    <Loader />
+}
+else
+{
+<div class="mx-lg-10 pt-lg-10 pb-lg-10">
+    <MudGrid Class="mx-auto" Spacing="0">
+        <MudItem xs="12" Class="mx-lg-10">
+            <div class="block-image">
+                <a href="" class="back-link">
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowRightAlt" Title="Back"/>
+                </a>
+                <img src="@($"{Config["ImageBasePath"]}/logo_RITA.png")" alt="@Loc["LogoRITA"]"/>
+            </div>
+
+            <div class="block-container">
+                <div class="left-block">
+                    <div class="location">
+                        <div class="circle">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <p>HOGENT campus Schoonmeersen D0.007</p>
+                    </div>
+
+                    <p>@Loc["SupportQuestion"]</p>
+                    <p>@Loc["SupportAssistance"]</p>
+
+                    <div class="block cta-buttons">
+                        <CommonLinkButton
+                            Text="@Loc["SendEmail"].Value"
+                            Icon="@Icons.Material.Outlined.Mail"
+                            Href="mailto:rita@hogent.be"/>
+
+                        <div class="secondButton">
+                            <CommonLinkButton
+                                Text="@Loc["ViewWebsite"].Value"
+                                Href="https://revolte.gent/rita/"
+                                Target="_blank" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="hours-card">
+                    @if (_support != null)
+                    {
+                        <h3>@Loc["OpeningHours"]</h3>
+
+                        <div class="status-badge" style="color:@(IsOpen() ? "limegreen" : "red")">Rita is @(IsOpen() ? Loc["Open"] : Loc["Closed"])</div>
+
+                        <div class="opening-hours">
+                            <ul>
+                                @foreach (var oh in _support.OpeningHours)
+                                {
+                                    <li>@oh.Day: @oh.Open - @oh.Close</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>@Loc["Loading"]</p>
+                    }
+                </div>
+            </div>
+        </MudItem>
+    </MudGrid>
+</div>
+}

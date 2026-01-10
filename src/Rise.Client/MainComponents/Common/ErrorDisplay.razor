@@ -1,0 +1,25 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Resources.MainComponents.Common.ErrorDisplay> Loc
+
+<div class="container">
+    <h1 class="label-errorcode">@ErrorCode</h1>
+    <h2>@Title</h2>
+
+    <p>@Message</p>
+
+    @if (ErrorCode == "401")
+    {
+        <AuthorizeView>
+            <NotAuthorized>
+                <CommonLinkButton Text=@Loc["Login"].Value Href="/login" Icon="@Icons.Material.Filled.Login"></CommonLinkButton>
+            </NotAuthorized>
+            <Authorized>
+                <CommonLinkButton Text=@Loc["Home"].Value Href="/" Icon="@Icons.Material.Filled.Home"></CommonLinkButton>
+            </Authorized>
+        </AuthorizeView>
+    }
+    else
+    {
+        <CommonLinkButton Text=@Loc["Home"].Value Href="/" Icon="@Icons.Material.Filled.Home"></CommonLinkButton>
+    }
+</div>
